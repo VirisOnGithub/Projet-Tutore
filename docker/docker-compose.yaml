@@ -1,0 +1,12 @@
+services:
+  db:
+    build:
+      context: images
+      dockerfile: MySQL_Dockerfile
+    ports:
+      - "3306:3306"
+    volumes:
+      - bdd_data:/var/lib/mysql
+
+volumes:
+  bdd_data:
