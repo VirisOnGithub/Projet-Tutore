@@ -1,8 +1,8 @@
 <template>
     <div v-if="isLoading" class="loading">Loading...</div>
     <Carousel v-else v-bind="carouselConfig">
-        <Slide v-for="poster in moviePosters" :key="poster">
-            <div class="carousel__item"><img :src="poster" /></div>
+        <Slide v-for="poster in paths" :key="poster">
+            <div class="carousel__item"><img :src="'http://image.tmdb.org/t/p/w600_and_h900_bestv2' + poster" /></div>
         </Slide>
     </Carousel>
 </template>
@@ -15,20 +15,16 @@ const carouselConfig = {
     wrapAround: true
 }
 
-const movieTitles = ['Titanic', 'Avatar', 'The Avengers', 'The Lion King', 'Frozen', 'The Incredibles', 'Finding Nemo', 'Toy Story', 'Aladdin', 'Beauty and the Beast'];
-const moviePosters: string[] = [];
+let paths: string[] = [];
 const isLoading = ref(true);
 
-const fetchPoster = async (title: string) => {
+const fetchPosters = async () => {
     try {
-        const response = await fetch('/api/poster', {
+        const response = await fetch('/api/getTrendingMovies', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                title
-            })
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -42,13 +38,17 @@ const fetchPoster = async (title: string) => {
 }
 
 onMounted(async () => {
-    const posterPromises = movieTitles.map(title => fetchPoster(title));
-    const posters = await Promise.all(posterPromises);
-    posters.forEach(data => {
-        if (data) {
-            moviePosters.push(data.Poster);
-        }
-    });
+    console.log('Fetching posters...');
+    const trendings = await fetchPosters();
+    paths = trendings.results.map((data: any) => data.poster_path);
+    
+    
+
+    // posters.forEach(data => {
+    //     if (data) {
+    //         moviePosters.push(data.Poster);
+    //     }
+    // });
     isLoading.value = false;
 });
 </script>
@@ -65,6 +65,10 @@ onMounted(async () => {
     font-size: 2rem;
     background-color: #f1f1f1;
     min-height: 300px;
+}
+
+.carousel__item > img {
+    width: 300px;
 }
 
 .loading {
