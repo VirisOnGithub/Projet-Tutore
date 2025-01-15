@@ -1,5 +1,5 @@
 <template>
-  <header class="row bg-secondary bg-opacity-50 p-3">
+  <header class="row bg-secondary bg-opacity-50 p-3 z-3 position-relative">
     <h1 class="col-3">TMDB2</h1>
     <nav class="col-6">
       <ul class="row d-flex align-items-center h-100">
@@ -8,6 +8,7 @@
         <li class="col-2"><NuxtLink to="/index" class="btn btn-outline-primary">TV Shows</NuxtLink></li>
         <li class="col-2"><NuxtLink to="/index23" class="btn btn-outline-primary">People</NuxtLink></li>
         <li class="col-2"><NuxtLink to="/about" class="btn btn-outline-primary">More</NuxtLink></li>
+        <li class="col-2"><NuxtLink to="/movie/762509" class="btn btn-outline-primary">The Lion King</NuxtLink></li>
       </ul>
     </nav>
     <div class="col-3 d-flex justify-content-end">
