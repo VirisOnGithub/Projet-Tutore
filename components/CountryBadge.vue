@@ -1,17 +1,10 @@
 <template>
-    <div class="px-2 rounded">
-        <img :src="getCountryFlag(country)" />
+        <img :src="getCountryFlag(country)" alt="flag of {{ country }}" />
         <span>{{ getCountryName(country) }}</span>
-    </div>
 </template>
 
 
 <style scoped>
-    div {
-        display: flex;
-        align-items: center;
-        background-color: grey;
-    }
     img {
         width: 2rem;
         height: 2rem;
@@ -29,6 +22,14 @@ defineProps({
 
 const getCountryFlag = (country: string) => {
     return `https://flagsapi.com/${country}/flat/64.png`;
+}
+
+const getCountryName = (country: string): string  => {
+    if (isoMap[country]) {
+        return isoMap[country];
+    } else {
+        throw new Error("Country not found");
+    }
 }
 
 const isoMap: { [key: string]: string } = {
@@ -283,13 +284,5 @@ const isoMap: { [key: string]: string } = {
     "ZA": "Afrique Du Sud",
     "ZM": "Zambie",
     "ZW": "Zimbabwe"
-}
-
-const getCountryName = (country: string): string  => {
-    if (isoMap[country]) {
-        return isoMap[country];
-    } else {
-        throw new Error("Country not found");
-    }
 }
 </script>
