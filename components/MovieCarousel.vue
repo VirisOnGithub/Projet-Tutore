@@ -1,8 +1,10 @@
 <template>
     <div v-if="isLoading" class="loading">Loading...</div>
     <Carousel v-else v-bind="carouselConfig">
-        <Slide v-for="poster in paths" :key="poster">
-            <div class="carousel__item"><img :src="'http://image.tmdb.org/t/p/w600_and_h900_bestv2' + poster" /></div>
+        <Slide v-for="poster in paths" :key="poster.id">
+                <NuxtLink :to="'/movie/' + poster.id">
+                    <div class="carousel__item"><img :src="'http://image.tmdb.org/t/p/w600_and_h900_bestv2' + poster.path" /></div>
+                </NuxtLink>
         </Slide>
     </Carousel>
 </template>
@@ -15,7 +17,7 @@ const carouselConfig = {
     wrapAround: true
 }
 
-let paths: string[] = [];
+const paths = ref<any[]>([]);
 const isLoading = ref(true);
 
 const fetchPosters = async () => {
@@ -40,7 +42,7 @@ const fetchPosters = async () => {
 onMounted(async () => {
     console.log('Fetching posters...');
     const trendings = await fetchPosters();
-    paths = trendings.results.map((data: any) => data.poster_path);
+    paths.value = trendings.results.map((data: any) => ({path: data.poster_path, id: data.id}));
     
     
 

@@ -5,9 +5,19 @@
     </Head>
     <div v-if="isLoading" class="loading">Loading...</div>
     <div v-else>
-        <img class="backdrop" :src="'http://image.tmdb.org/t/p/w1280_and_h720_bestv2' + movieInfos.backdrop_path" />
+        <img class="backdrop" :src="'http://image.tmdb.org/t/p/w1280' + movieInfos.backdrop_path" />
         <div class="gray-filter"></div>
         <div class="cta"></div>
+        <div class="banner">
+            <img :src="'http://image.tmdb.org/t/p/w1280' + movieInfos.poster_path" id="poster" />
+            <div id="movieDetails">
+                <h1 id="movieTitle">{{ movieInfos.title }}</h1>
+                <div id="badges">
+                    <CountryBadge v-for="country in movieInfos.production_countries" :key="country.iso_3166_1" :country="country.iso_3166_1" />
+                </div>
+                <p id="movieOverview">{{ movieInfos.overview }}</p> 
+            </div>
+        </div>
         <div class="other">
 
         </div>
@@ -18,6 +28,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import CountryBadge from '~/components/CountryBadge.vue';
 const route = useRoute();
 const isLoading = ref(true);
 let movieInfos: any = null;
@@ -51,6 +62,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
 .backdrop {
     width: 100vw;
     transform: translateY(-10%);
@@ -79,5 +91,37 @@ onMounted(async () => {
 .other {
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+#poster {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 20%;
+}
+
+#movieDetails {
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    width: 30%;
+    color: white;
+    margin-top: 2rem;
+    font-family: "Inter", serif;
+
+    > #movieTitle {
+        font-size: 4rem;
+        font-weight: 800;
+    }
+    > #movieOverview {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+}
+
+#badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 </style>
