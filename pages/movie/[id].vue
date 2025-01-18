@@ -21,7 +21,13 @@
                         <Badge>{{ movieInfos.genres.map((genre: Genres) => genre.name).join(", ") }}</Badge>
                         <Badge>{{ castDuration(movieInfos.runtime) }}</Badge>
                     </div>
-                    <h1 id="movieTitle" class="fw-bold" style="font-size: 4rem">{{ movieInfos.title }}</h1>
+                    <h1 id="movieTitle" class="fw-bold" style="font-size: 3rem">{{ movieInfos.title }}</h1>
+                    <p id="movieTagline" class="fs-5 fw-light">{{ movieInfos.tagline }}</p>
+                    <div id="stars" class="d-flex mb-3">
+                      <Badge>
+                          <StarBadge :rating="movieInfos.vote_average" />
+                      </Badge>
+                    </div>
                     <div id="badges" class="mb-3 d-flex flex-wrap gap-2">
                         <Badge v-for="country in movieInfos.production_countries">
                             <CountryBadge :key="country.iso_3166_1" :country="country.iso_3166_1" />
@@ -40,7 +46,6 @@
 <script lang="ts" setup>
 import {onMounted, ref} from 'vue';
 import {useRoute} from 'vue-router';
-import CountryBadge from '~/components/CountryBadge.vue';
 
 const route = useRoute();
 const isLoading = ref(true);
@@ -76,7 +81,7 @@ interface Movie {
   tagline: string,
   title: string,
   video: any,
-  vote_average: string,
+  vote_average: number,
   vote_count: number
 }
 
@@ -128,9 +133,9 @@ onMounted(async () => {
 }
 
 #movieDetails {
-    top: 30%;
-    left: 35%;
-    width: 30%;
-    font-family: "Inter", serif;
+  top: 30%;
+  left: 35%;
+  width: 30%;
+  font-family: "Inter", serif;
 }
 </style>

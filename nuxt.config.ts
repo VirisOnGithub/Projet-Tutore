@@ -5,5 +5,5 @@ export default defineNuxtConfig({
     modules: [
       'usebootstrap',
       "vue3-carousel-nuxt"
-    ]
+    ],
 });
