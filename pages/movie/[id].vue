@@ -13,24 +13,25 @@
                 style="background: rgba(0, 0, 0, 0.5);"></div>
             <div id="cta" class="position-absolute top-0 start-0 end-0 bottom-0 bg-gradient-black"></div>
             <div class="banner">
-                <img :src="'https://image.tmdb.org/t/p/w1280' + movieInfos.poster_path" id="poster"  alt="Poster"/>
-                <div id="movieDetails">
-                    <div id="additionalInformation">
+                <img :src="'https://image.tmdb.org/t/p/w1280' + movieInfos.poster_path" class="position-absolute"
+                     style="top: 30%; left: 10%; width: 20%;" id="poster" alt="Poster"/>
+                <div id="movieDetails" class="text-white mt-5 position-absolute">
+                    <div id="additionalInformation" class="d-flex flex-wrap gap-2">
                         <Badge>{{ movieInfos.release_date.substring(0, 4) }}</Badge>
                         <Badge>{{ movieInfos.genres.map((genre: Genres) => genre.name).join(", ") }}</Badge>
                         <Badge>{{ castDuration(movieInfos.runtime) }}</Badge>
                     </div>
-                    <h1 id="movieTitle">{{ movieInfos.title }}</h1>
-                    <div id="badges">
+                    <h1 id="movieTitle" class="fw-bold" style="font-size: 4rem">{{ movieInfos.title }}</h1>
+                    <div id="badges" class="mb-3 d-flex flex-wrap gap-2">
                         <Badge v-for="country in movieInfos.production_countries">
                             <CountryBadge :key="country.iso_3166_1" :country="country.iso_3166_1" />
                         </Badge>
                     </div>
-                    <p id="movieOverview">{{ movieInfos.overview }}</p>
+                    <p id="movieOverview" class="fs-6 fw-normal">{{ movieInfos.overview }}</p>
                 </div>
             </div>
-            <div class="other">
-
+            <div class="cover-image position-absolute z-1 top-100 start-0 end-0 h-100 text-white" style="background-color: #202020">
+              dsqdq
             </div>
         </div>
     </div>
@@ -43,7 +44,7 @@ import CountryBadge from '~/components/CountryBadge.vue';
 
 const route = useRoute();
 const isLoading = ref(true);
-let movieInfos: Movie = null;
+let movieInfos: Movie;
 
 interface Genres {
     id: number;
@@ -116,46 +117,20 @@ onMounted(async () => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
 
+
 .bg-gradient-black {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(32, 32, 32, 1) 90%);
 }
 
 .other {
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-#poster {
-    position: absolute;
-    top: 30%;
-    left: 10%;
-    width: 20%;
+    background-color: #202020;
 }
 
 #movieDetails {
-    position: absolute;
     top: 30%;
     left: 35%;
     width: 30%;
-    color: white;
-    margin-top: 2rem;
     font-family: "Inter", serif;
-
-    >#movieTitle {
-        font-size: 4rem;
-        font-weight: 800;
-    }
-
-    >#movieOverview {
-        font-size: 1rem;
-        font-weight: 400;
-    }
-}
-
-#badges,
-#additionalInformation {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
 }
 </style>

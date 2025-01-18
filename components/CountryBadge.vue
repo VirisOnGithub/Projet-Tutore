@@ -1,4 +1,4 @@
-<template>
+ <template>
         <img :src="getCountryFlag(country)" alt="flag of {{ country }}" />
         <span>{{ getCountryName(country) }}</span>
 </template>
