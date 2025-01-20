@@ -12,7 +12,7 @@ const getNumberofFullStars = (rating: number): number => {
 }
 
 const getNumberOfHalfStars = (rating: number): number => {
-  return (rating % 1) >= 0.5 ? 1 : 0;
+  return (rating / 2 % 1) >= 0.5 ? 1 : 0;
 }
 
 const getNumberOfEmptyStars = (rating: number) => {
