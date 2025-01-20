@@ -1,35 +1,30 @@
 <template>
-  <header class="row bg-dark p-3 z-[3]">
-    <nav class="flex flex-wrap items-center justify-between bg-dark p-3 z-[3] relative">
+  <header class="row p-3">
+    <nav class="flex flex-wrap items-center justify-between p-3 z-[3] relative">
       <NuxtLink to="/" class="flex items-center">
         <img src="/main_logo.svg" class="align-top">
-        <h1 class="inline-block text-white ml-2">MovieFinder</h1>
+        <h1 class="inline-block text-white ml-2 font-bold text-4xl">MovieFinder</h1>
       </NuxtLink>
-      <ul class="flex flex-row space-x-4">
+      <ul class="flex">
         <li>
-          <NuxtLink to="/" class="btn btn-outline-primary">Home</NuxtLink>
+          <NuxtLink to="/" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">Home</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/" class="btn btn-outline-primary">Movies</NuxtLink>
+          <NuxtLink to="/" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">Movies</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/" class="btn btn-outline-primary">TV Shows</NuxtLink>
+          <NuxtLink to="/" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">TV Shows</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/" class="btn btn-outline-primary">People</NuxtLink>
+          <NuxtLink to="/" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">People</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/about" class="btn btn-outline-primary">More</NuxtLink>
+          <NuxtLink to="/about" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">More</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/movie/762509" class="btn btn-outline-primary">The Lion King</NuxtLink>
+          <NuxtLink to="/movie/762509" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">The Lion King</NuxtLink>
         </li>
       </ul>
-      <div class="flex">
-        <input
-            class="form-control border border-primary text-primary bg-secondary bg-opacity-10 placeholder-primary focus:ring-primary focus:ring-2"
-            type="text" placeholder="Search"/>
-      </div>
     </nav>
   </header>
 </template>

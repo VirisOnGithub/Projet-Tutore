@@ -5,7 +5,7 @@
     </Head>
     <div v-if="isLoading" class="loading">Loading...</div>
     <div v-else>
-      <div id="imageWrapper" class="w-full overflow-hidden z-[-1] relative">
+      <div id="imageWrapper" class="overflow-hidden z-[-1] relative">
         <img class="w-full" :src="'https://image.tmdb.org/t/p/w1280' + movieInfos.backdrop_path" alt="Backdrop"/>
       </div>
       <div id="gray-filter" class="absolute inset-0" style="background: rgba(0, 0, 0, 0.5);"></div>
