@@ -14,10 +14,10 @@
     "@nuxt/ui": "^2.21.0",
     "express": "^4.21.2",
     "mysql": "^2.18.1",
-    "nuxt": "^3.15.0",
+    "nuxt": "^3.15.2",
     "vue": "latest",
     "vue-router": "latest",
-    "vue3-carousel-nuxt": "^1.1.4"
+    "vue3-carousel-nuxt": "^1.1.5"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
