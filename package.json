@@ -11,8 +11,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/ui": "^2.21.0",
     "nuxt": "^3.15.0",
-    "usebootstrap": "^3.5.100",
     "vue": "latest",
     "vue-router": "latest",
     "vue3-carousel-nuxt": "^1.1.4"
