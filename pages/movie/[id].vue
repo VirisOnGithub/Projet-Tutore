@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="cover-image absolute z-[1] top-full inset-x-0 h-full text-white" style="background-color: #202020;">
-        dsqdq
+        
       </div>
     </div>
   </div>
