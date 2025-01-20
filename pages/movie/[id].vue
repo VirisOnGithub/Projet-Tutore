@@ -25,7 +25,12 @@
                     <p id="movieTagline" class="fs-5 fw-light">{{ movieInfos.tagline }}</p>
                     <div id="stars" class="d-flex mb-3">
                       <Badge>
-                          <StarBadge :rating="movieInfos.vote_average" />
+                          <Badge v-if="movieInfos.vote_average > 0">
+                              <StarBadge :rating="movieInfos.vote_average" />
+                          </Badge>
+                          <Badge v-else class="fs-6">
+                              Pas encore sorti
+                          </Badge>
                       </Badge>
                     </div>
                     <div id="badges" class="mb-3 d-flex flex-wrap gap-2">
