@@ -47,9 +47,11 @@
 import {onMounted, ref} from 'vue';
 import {useRoute} from 'vue-router';
 
+
 const route = useRoute();
 const isLoading = ref(true);
 let movieInfos: Movie;
+let users: any;
 
 interface Genres {
   id: number;
@@ -104,6 +106,21 @@ const fetchMovieInfos = async () => {
   }
 }
 
+const fetchUser = async () => {
+      try {
+        const response = await fetch('/api/getUser');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const user = await response.json();
+        console.log('User fetched:', user);
+        return user;
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        return null;
+      }
+    };
+
 const castDuration = (duration: number): string => {
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
@@ -113,6 +130,7 @@ const castDuration = (duration: number): string => {
 onMounted(async () => {
   console.log('Fetching movie infos...');
   movieInfos = await fetchMovieInfos();
+  users = await fetchUser();
   console.log(movieInfos);
   isLoading.value = false;
 
