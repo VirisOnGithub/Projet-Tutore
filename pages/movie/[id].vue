@@ -24,7 +24,8 @@
           <p id="movieTagline" class="text-lg font-light">{{ movieInfos.tagline }}</p>
           <div id="stars" class="flex mb-3">
             <Badge>
-              <StarBadge :rating="movieInfos.vote_average"/>
+              <StarBadge v-if="movieInfos.vote_average > 0" :rating="movieInfos.vote_average"/>
+                <span v-else class="text-lg">No rating</span>
             </Badge>
           </div>
           <div id="badges" class="mb-3 flex flex-wrap gap-2">
