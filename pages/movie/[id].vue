@@ -9,30 +9,30 @@
         <img class="w-full" :src="'https://image.tmdb.org/t/p/w1280' + movieInfos.backdrop_path" alt="Backdrop"/>
       </div>
       <div id="gray-filter" class="absolute inset-0" style="background: rgba(0, 0, 0, 0.5);"></div>
-      <div id="cta" class="absolute inset-0 bg-gradient-to-b from-transparent to-[#202020]"></div>
+      <div id="cta" class="absolute inset-0 bg-gradient-to-b from-transparent to-[#202020] z-[1]"></div>
       <div class="banner">
         <img :src="'https://image.tmdb.org/t/p/w1280' + movieInfos.poster_path"
-             class="absolute top-[30%] left-[10%] w-[20%]"
+             class="absolute top-[30%] left-[10%] w-[20%] z-[2]"
              id="poster" alt="Poster"/>
-        <div id="movieDetails" class="text-white mt-5 absolute top-[30%] left-[35%] w-[30%] font-['Inter']">
+        <div id="movieDetails" class="text-white mt-5 absolute top-[30%] left-[35%] w-[30%] font-['Inter'] z-[2]">
           <div id="additionalInformation" class="flex flex-wrap gap-2">
             <Badge>{{ movieInfos.release_date.substring(0, 4) }}</Badge>
             <Badge>{{ movieInfos.genres.map((genre: Genres) => genre.name).join(", ") }}</Badge>
             <Badge>{{ castDuration(movieInfos.runtime) }}</Badge>
           </div>
-          <h1 id="movieTitle" class="font-bold text-3xl">{{ movieInfos.title }}</h1>
-          <p id="movieTagline" class="text-lg font-light">{{ movieInfos.tagline }}</p>
-          <div id="stars" class="flex mb-3">
+          <h1 id="movieTitle" class="font-bold text-3xl z-[2]">{{ movieInfos.title }}</h1>
+          <p id="movieTagline" class="text-lg font-light z-[2]">{{ movieInfos.tagline }}</p>
+          <div id="stars" class="flex mb-3 z-[2]">
             <Badge>
               <StarBadge :rating="movieInfos.vote_average"/>
             </Badge>
           </div>
-          <div id="badges" class="mb-3 flex flex-wrap gap-2">
+          <div id="badges" class="mb-3 flex flex-wrap gap-2 z-[2]">
             <Badge v-for="country in movieInfos.production_countries" :key="country.iso_3166_1">
               <CountryBadge :country="country.iso_3166_1"/>
             </Badge>
           </div>
-          <p id="movieOverview" class="text-base font-normal">{{ movieInfos.overview }}</p>
+          <p id="movieOverview" class="text-base font-normal z-[2]">{{ movieInfos.overview }}</p>
         </div>
       </div>
       <div class="cover-image absolute z-[1] top-full inset-x-0 h-full text-white" style="background-color: #202020;">

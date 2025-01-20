@@ -1,6 +1,6 @@
 <template>
-  <header class="row bg-dark p-3 z-3">
-    <nav class="flex flex-wrap items-center justify-between bg-dark p-3 z-3">
+  <header class="row bg-dark p-3 z-[3]">
+    <nav class="flex flex-wrap items-center justify-between bg-dark p-3 z-[3] relative">
       <NuxtLink to="/" class="flex items-center">
         <img src="/main_logo.svg" class="align-top">
         <h1 class="inline-block text-white ml-2">MovieFinder</h1>
