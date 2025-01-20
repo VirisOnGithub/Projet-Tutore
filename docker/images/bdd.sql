@@ -1,7 +1,10 @@
+create DATABASE projetTutore;
+USE projetTutore;
+
 create table comment (
    id_com      int primary key,
    id_film     int not null,
-   content     clob,
+   content     TEXT,
    rating_user int,
    id_user     int
 );
@@ -15,23 +18,15 @@ create table user (
 create table favourite (
    id_user int,
    id_film int,
-   primary key ( id_user,
-                 id_film )
+   primary key ( id_user, id_film )
 );
 
 create table watchlater (
    id_user int,
    id_film int,
-   primary key ( id_user,
-                 id_film )
+   primary key ( id_user, id_film )
 );
 
-alter table comment
-   add foreign key ( id_user )
-      references user ( id_user );
-alter table favourite
-   add foreign key ( id_user )
-      references user ( id_user );
-alter table watchlater
-   add foreign key ( id_user )
-      references user ( id_user );
+ALTER TABLE comment ADD FOREIGN KEY (id_user) REFERENCES user (id_user);
+ALTER TABLE favourite ADD FOREIGN KEY (id_user) REFERENCES user (id_user);
+ALTER TABLE watchlater ADD FOREIGN KEY (id_user) REFERENCES user (id_user);
