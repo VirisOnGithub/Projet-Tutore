@@ -107,19 +107,19 @@ const fetchMovieInfos = async () => {
 }
 
 const fetchUser = async () => {
-      try {
-        const response = await fetch('/api/getUser');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const user = await response.json();
-        console.log('User fetched:', user);
-        return user;
-      } catch (error) {
-        console.error('Error fetching user:', error);
-        return null;
-      }
-    };
+  try {
+    const response = await fetch('/api/getUser');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const user = await response.json();
+    console.log('User fetched:', user);
+    return user;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    return null;
+  }
+};
 
 const castDuration = (duration: number): string => {
   const hours = Math.floor(duration / 60);

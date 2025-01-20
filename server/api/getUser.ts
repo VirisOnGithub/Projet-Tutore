@@ -1,15 +1,20 @@
-import connectToDatabase from "./getBdd";
-import { Request, Response } from 'express';
+import { connectToDatabase } from './getBdd';
 
-export async function getUser(req: Request, res: Response) {
+
+export default defineEventHandler(async () => {
     try {
-        const connexion = await connectToDatabase();
-        const result = await connexion.query("SELECT * FROM user");
-        console.log(result);
-        res.status(200).json(result);
-        return result;
-    } catch (err) {
-        console.error('Error in getUser:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        const connection = await connectToDatabase();
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * from user', function (error, results) {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                console.log('The solution is: ', results[0]);
+                resolve(results[0]);
+            });
+        });
+    } catch (error) {
+        throw createError({statusCode: 500, message: 'Database query failed'});
     }
-}
+});

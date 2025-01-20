@@ -1,7 +1,7 @@
 import { createConnection } from 'mysql';
 
-async function connectToDatabase() {
-    const connection = await createConnection({
+export async function connectToDatabase() {
+    const connection = createConnection({
         host: 'localhost',
         user: 'root',
         password: 'root',
@@ -12,8 +12,6 @@ async function connectToDatabase() {
     return connection;
 }
 
-connectToDatabase().catch(err => {
-    console.error('Error connecting to the database:', err);
+export default defineEventHandler(async () => {
+    return connectToDatabase();
 });
-
-export default connectToDatabase;
