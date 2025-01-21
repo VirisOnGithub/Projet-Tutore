@@ -7,7 +7,7 @@
       </NuxtLink>
       <ul class="flex">
         <li>
-          <NuxtLink to="/" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">Home</NuxtLink>
+          <NuxtLink to="/login" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">Sign in</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">Movies</NuxtLink>
