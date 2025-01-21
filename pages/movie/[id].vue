@@ -22,7 +22,7 @@
           <div id="stars" class="flex mb-3 z-[2]">
             <Badge>
               <StarBadge v-if="movieInfos.vote_average > 0" :rating="movieInfos.vote_average"/>
-                <span v-else class="text-lg">No rating</span>
+              <span v-else class="text-lg">No rating</span>
             </Badge>
           </div>
           <div id="badges" class="mb-3 flex flex-wrap gap-2 z-[2]">
@@ -34,25 +34,42 @@
         </div>
       </div>
       <div class="cover-image absolute z-[1] top-full inset-x-0 h-full text-white" style="background-color: #202020;">
-        
+        <div v-if="!comments || comments.length === 0" class="text-center mt-5">
+          <p>Aucun commentaire n'est disponible.</p>
+        </div>
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
+          <div v-for="(comment, index) in comments" :key="index" class="bg-gray-800 p-5 rounded-lg">
+            <div class="flex justify-between">
+              <h3 class="text-lg font-bold">{{ comment.user_name }}</h3>
+              <p>{{ comment.rating_user }}</p>
+            </div>
+            <p class="mt-2">{{ comment.content }}</p>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue';
 import {useHead} from "@unhead/vue";
 import {useRoute} from 'vue-router';
 
 const route = useRoute();
 const isLoading = ref(true);
 let movieInfos: Movie;
-let users: any;
+let comments: Comment[];
 
 interface Genres {
   id: number;
   name: string;
+}
+
+interface Comment {
+  rating_user: number;
+  content: string;
+  user_name: string;
 }
 
 interface Movie {
@@ -103,17 +120,23 @@ const fetchMovieInfos = async () => {
   }
 }
 
-const fetchUser = async () => {
+const fetchComments = async () => {
   try {
-    const response = await fetch('/api/getUser');
+    const response = await fetch('/api/getComments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ movieId: route.params.id })
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const user = await response.json();
-    console.log('User fetched:', user);
-    return user;
+    const comments = await response.json();
+    console.log('Comments fetched:', comments);
+    return comments;
   } catch (error) {
-    console.error('Error fetching user:', error);
+    console.error('Error fetching comments:', error);
     return null;
   }
 };
@@ -127,9 +150,13 @@ const castDuration = (duration: number): string => {
 onMounted(async () => {
   console.log('Fetching movie infos...');
   movieInfos = await fetchMovieInfos();
-  users = await fetchUser();
   useHead({titleTemplate: (movieInfos.title)});
   console.log(movieInfos);
+
+  console.log('Fetching comments...');
+  comments = await fetchComments();
+  console.log(comments);
+
   isLoading.value = false;
 
 });
