@@ -4,7 +4,7 @@
 
 <template>
   <div id="imageWrapper" class="z-[-1] relative">
-    <img class="" src="public/index_backdrop.svg" alt="Backdrop"/>
+    <img class="" src="public/index_backdrop.webp" alt="Backdrop"/>
   </div>
   <div id="gray-filter" class="absolute inset-0 w-screen h-auto" style="background: rgba(0, 0, 0, 0.5);"></div>
   <div id="login" class="bg-black rounded shadow flex flex-col justify-between p-5">
