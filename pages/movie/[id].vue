@@ -1,8 +1,5 @@
 <template>
   <div>
-    <Head>
-      <Title>{{ $route.params.id }}</Title>
-    </Head>
     <div v-if="isLoading" class="loading">Loading...</div>
     <div v-else>
       <div id="imageWrapper" class="overflow-hidden z-[-1] relative">
@@ -45,8 +42,8 @@
 
 <script lang="ts" setup>
 import {onMounted, ref} from 'vue';
+import {useHead} from "@unhead/vue";
 import {useRoute} from 'vue-router';
-
 
 const route = useRoute();
 const isLoading = ref(true);
@@ -131,6 +128,7 @@ onMounted(async () => {
   console.log('Fetching movie infos...');
   movieInfos = await fetchMovieInfos();
   users = await fetchUser();
+  useHead({titleTemplate: (movieInfos.title)});
   console.log(movieInfos);
   isLoading.value = false;
 
