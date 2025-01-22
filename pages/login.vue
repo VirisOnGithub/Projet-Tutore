@@ -41,7 +41,10 @@ async function login() {
           <label class="text-s font-bold after:content-['*'] after:text-red-400" for="password">Password </label>
           <input v-model="password" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" type="password"
                  required placeholder="********" id="password">
-          <a href="#" class="block text-right text-xs text-indigo-500 text-right mb-4">Forgot Password?</a>
+            <div class="flex justify-between mb-4">
+            <a href="#" class="text-xs text-indigo-500">Forgot Password ?</a>
+            <a href="/createAccount" class="text-xs text-indigo-500">Sign In</a>
+            </div>
           <button @click="login"
               class="w-full rounded bg-blue-600 text-indigo-50 p-2 text-center font-bold hover:bg-blue-500 active:bg-blue-700">
             Log In

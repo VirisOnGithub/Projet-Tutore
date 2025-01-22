@@ -28,7 +28,7 @@
           <NuxtLink to="/movie/762509" :class="buttonStyle">The Lion King</NuxtLink>
         </li>
         <li v-if="loggedIn">
-          <NuxtLink @click="logOut" :class="buttonStyle">Log out</NuxtLink>
+          <NuxtLink @click="logOut" :class="buttonStyle" class="cursor-pointer">Log out</NuxtLink>
         </li>
       </ul>
     </nav>
