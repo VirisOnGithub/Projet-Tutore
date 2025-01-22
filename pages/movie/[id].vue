@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-if="isLoading" class="loading">Loading...</div>
+    <div v-if="isLoading" class="loading">
+      <div class="absolute top-1/2 left-1/2 translate-y-1/2 translate-x-1/2">
+        <div class="w-10 h-10 border-4 border-t-white border-gray-600 rounded-full animate-spin"></div>
+      </div>
+    </div>
     <div v-else>
       <div id="imageWrapper" class="z-[-1] relative">
         <img class="w-full" :src="'https://image.tmdb.org/t/p/w1280' + movieInfos.backdrop_path" alt="Backdrop"/>
