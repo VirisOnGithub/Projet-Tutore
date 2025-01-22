@@ -30,7 +30,9 @@
 </template>
 
 <script lang="ts" setup>
+
 const buttonStyle : string = "bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1 transition-all";
+
 
 </script>
 
