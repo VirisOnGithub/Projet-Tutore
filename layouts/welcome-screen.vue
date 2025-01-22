@@ -1,9 +1,8 @@
 <template>
-  <body>
+  <img src="/index_backdrop.webp" alt="Background Image" class="fixed top-0 left-0 w-full h-full object-cover z-[-1]">
   <div class="flex-column w-screen h-screen overflow-hidden">
     <slot/>
   </div>
-  </body>
 </template>
 
 <script setup lang="ts">
@@ -11,10 +10,5 @@
 </script>
 
 <style scoped>
-body {
-  background-image:
-  linear-gradient(rgba(0, 0, 20, 0.5), rgba(0, 0, 0, 0.5)),
-  url("/index_backdrop.webp");
-}
 
 </style>

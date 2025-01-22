@@ -64,6 +64,9 @@
 </template>
 
 <script lang="ts" setup>
+definePageMeta({
+  layout: 'default',
+});
 
 const route = useRoute();
 const isLoading = ref(true);
