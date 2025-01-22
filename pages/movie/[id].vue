@@ -51,6 +51,9 @@
             <p class="mt-2">{{ comment.content }}</p>
           </div>
         </div>
+        <div class="flex items-center justify-center mt-10">
+          <button @click="addComment" class="bg-transparent font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
+        </div>
       </div>
     </div>
   </div>
@@ -148,6 +151,34 @@ const castDuration = (duration: number): string => {
   const minutes = duration % 60;
   return `${hours}h${minutes}m`;
 }
+
+const addComment = async () => {
+  try {
+    const response = await fetch('/api/addComment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        movieId: route.params.id,
+        content: "Film magnifique et adapté pour tout âge. Je le recommande à tout le monde !",
+        rating: 10,
+        userId: 1
+      })
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const comment = await response.json();
+    console.log('Comment inserted:', comment);
+    comments = await fetchComments();
+    console.log(comments)
+    return null;
+  } catch (error) {
+    console.error('Error inserting new comment:', error);
+    return null;
+  }
+};
 
 onMounted(async () => {
   console.log('Fetching movie infos...');
