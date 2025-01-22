@@ -1,10 +1,10 @@
 import { connectToDatabase } from './getBdd';
 import { z } from 'zod';
 
-const bodySchema = z.object({
-    username: z.string(),
-    password: z.string()
-});
+interface Connect {
+    username: string,
+    password: string
+}
 
 interface User {
     id_user: number,
@@ -12,7 +12,7 @@ interface User {
     user_password: string
 }
 
-async function getIdentification(username: string, password: string): Promise<User> {
+async function luka(username: string, password: string): Promise<User> {
     try {
         const connection = await connectToDatabase();
         return new Promise((resolve, reject) => {
@@ -32,8 +32,10 @@ async function getIdentification(username: string, password: string): Promise<Us
 }
 
 export default defineEventHandler(async (event) => {
-    const { username, password } = await readValidatedBody(event, bodySchema.parse);
-    const user: User = await getIdentification(username, password);
+    const body = await readBody(event);
+    const username = body.username;
+    const password = body.password;
+    const user: User = await luka(username, password);
     console.log(user);
 
     console.log('username', username);

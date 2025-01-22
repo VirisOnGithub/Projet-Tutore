@@ -1,28 +1,31 @@
 <script setup lang="ts">
-const { loggedIn, user, fetch: refreshSession , clear: clearSession } = useUserSession()
+const { loggedIn, user, fetch: refreshSession , clear: clearSession, session } = useUserSession()
 const router = useRouter()
 
-const credentials = reactive({
-  email: '',
-  password: '',
-})
+const username = ref("");
+const password = ref("");
 
 async function login() {
   await clearSession()
-  $fetch('/api/getIdentification', {
+  $fetch('/api/luka', {
     method: 'POST',
-    body: credentials
+    body: {
+      username: username.value,
+      password: password.value
+    }
   })
   .then(async () => {
     await refreshSession()
     if (loggedIn.value) {
       console.log('User session set', user.value);
       console.log('User session set', loggedIn.value);
+      console.log('User session set', session.value);
       alert('Logged in!')
+      await router.push('/')
     }
   })
   .catch((e: Error) => {
-    console.error('Error logging in', e)
+    console.error(e.message);
   })
 }
 
@@ -35,10 +38,10 @@ async function login() {
           <legend class="text-center bold text-2xl">Welcome again!</legend>
           <hr class="mt-5 mb-5">
           <label class="text-s font-bold after:content-['*'] after:text-red-400" for="email">Login </label>
-          <input v-model="credentials.email" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" required
+          <input v-model="username" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" required
                  placeholder="xX_cooldude69_Xx" id="email" type="text">
           <label class="text-s font-bold after:content-['*'] after:text-red-400" for="password">Password </label>
-          <input v-model="credentials.password" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" type="password"
+          <input v-model="password" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" type="password"
                  required placeholder="********" id="password">
           <a href="#" class="block text-right text-xs text-indigo-500 text-right mb-4">Forgot Password?</a>
           <button @click="login"
