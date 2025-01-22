@@ -24,7 +24,7 @@ const login = async (event: Event) => {
     const data = await response.json();
     if (data.success) {
       console.log('Login successful');
-      
+      await navigateTo('/');
     } else {
       console.log('Login failed');
     }
