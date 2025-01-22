@@ -2,7 +2,7 @@ create DATABASE projetTutore;
 USE projetTutore;
 
 create table comment (
-   id_com      int primary key,
+   id_com      int primary key AUTO_INCREMENT,
    id_film     int not null,
    content     TEXT,
    rating_user int,
@@ -10,7 +10,7 @@ create table comment (
 );
 
 create table user (
-   id_user       int primary key,
+   id_user       int primary key AUTO_INCREMENT,
    user_name     varchar(42),
    user_password varchar(42)
 );
