@@ -7,19 +7,19 @@
       </NuxtLink>
       <ul class="flex">
         <li v-if="loggedIn">
-          <NuxtLink to="/pages/browse" :class="buttonStyle">Profile</NuxtLink>
+          <NuxtLink to="/browse" :class="buttonStyle">Profile</NuxtLink>
         </li>
         <li v-else>
           <NuxtLink to="/login" :class="buttonStyle">Log in</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/pages/browse" :class="buttonStyle">Movies</NuxtLink>
+          <NuxtLink to="/browse" :class="buttonStyle">Movies</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/pages/browse" :class="buttonStyle">TV Shows</NuxtLink>
+          <NuxtLink to="/browse" :class="buttonStyle">TV Shows</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/pages/browse" :class="buttonStyle">People</NuxtLink>
+          <NuxtLink to="/browse" :class="buttonStyle">People</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/about" :class="buttonStyle">More</NuxtLink>

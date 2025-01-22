@@ -19,7 +19,7 @@ async function login() {
       console.log('User session set', user.value);
       console.log('User session set', loggedIn.value);
       console.log('User session set', session.value);
-      await router.push('/carousel')
+      await router.push('/browse')
     }
   })
   .catch((e: Error) => {
