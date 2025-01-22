@@ -56,6 +56,8 @@
           </div>
         </div>
         <div class="flex items-center justify-center mt-10">
+          <input v-model="commentaire" type="textarea" class="border border-gray-300 p-2 rounded m-1" placeholder="Votre commentaire">
+          <RatingSlider :rating="newRating" @update:rating="updateRating"/>
           <button @click="addComment" class="bg-transparent font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
         </div>
       </div>
@@ -72,6 +74,8 @@ const route = useRoute();
 const isLoading = ref(true);
 let movieInfos: Movie;
 let comments: Ref<Comment[] | null> = ref(null);
+const commentaire = ref("");
+const newRating = ref(0);
 
 interface Genres {
   id: number;
@@ -168,8 +172,8 @@ const addComment = async () => {
       },
       body: JSON.stringify({
         movieId: route.params.id,
-        content: "Film magnifique et adapté pour tout âge. Je le recommande à tout le monde !",
-        rating: 10,
+        content: commentaire.value,
+        rating: newRating.value,
         userId: 1
       })
     });
@@ -185,6 +189,10 @@ const addComment = async () => {
     console.error('Error inserting new comment:', error);
     return null;
   }
+};
+
+const updateRating = (rating: number) => {
+  newRating.value = rating;
 };
 
 onMounted(async () => {
