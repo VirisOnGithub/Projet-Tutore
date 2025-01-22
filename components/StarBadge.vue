@@ -21,7 +21,7 @@ const getNumberOfEmptyStars = (rating: number) => {
 </script>
 
 <template>
-  <div class="flex items-center py-1">
+  <div class="flex items-center">
     <img v-for="n in getNumberofFullStars(rating)" src="/full_star.svg" alt="full star" class="w-4 h-4">
     <img v-for="n in getNumberOfHalfStars(rating)" src="/half_star.svg" alt="half star" class="w-4 h-4">
     <img v-for="n in getNumberOfEmptyStars(rating)" src="/empty_star.svg" alt="empty star" class="w-4 h-4">

@@ -33,15 +33,20 @@
           <p id="movieOverview" class="text-base font-normal z-[2]">{{ movieInfos.overview }}</p>
         </div>
       </div>
-      <div class="cover-image absolute z-[1] top-full inset-x-0 h-full text-white" style="background-color: #202020;">
+      <div class="cover-image absolute z-[1] top-full inset-x-0 h-full text-white pt-32" style="background-color: #202020;">
         <div v-if="!comments || comments.length === 0" class="text-center mt-5">
           <p>Aucun commentaire n'est disponible.</p>
         </div>
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
-          <div v-for="(comment, index) in comments" :key="index" class="bg-gray-800 p-5 rounded-lg">
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 md:mr-[10%] md:ml-[10%]">
+          <div v-for="(comment, index) in comments" :key="index" class="bg-[#202020] border border-white p-5 rounded-lg  mr-[5%] ml-[5%] mb-[5%]">
             <div class="flex justify-between">
-              <h3 class="text-lg font-bold">{{ comment.user_name }}</h3>
-              <p>{{ comment.rating_user }}</p>
+              <div class="flex items-center">
+                <img src="/public/people.svg" alt="User" class="w-10 h-10 rounded-full mr-2">
+                <h3 class="text-lg font-bold">{{ comment.user_name }}</h3>
+              </div>
+              <Badge>
+                <StarBadge :rating="comment.rating_user"/>
+              </Badge>
             </div>
             <p class="mt-2">{{ comment.content }}</p>
           </div>
