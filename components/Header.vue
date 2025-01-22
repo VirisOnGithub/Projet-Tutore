@@ -6,7 +6,10 @@
         <h1 class="inline-block text-white ml-2 font-bold text-4xl">MovieFinder</h1>
       </NuxtLink>
       <ul class="flex">
-        <li>
+        <li v-if="loggedIn">
+          <NuxtLink to="/carousel" :class="buttonStyle">Profile</NuxtLink>
+        </li>
+        <li v-else>
           <NuxtLink to="/login" :class="buttonStyle">Sign in</NuxtLink>
         </li>
         <li>
@@ -24,6 +27,9 @@
         <li>
           <NuxtLink to="/movie/762509" :class="buttonStyle">The Lion King</NuxtLink>
         </li>
+        <li v-if="loggedIn">
+          <NuxtLink @click="logOut" :class="buttonStyle" class="cursor-pointer">Sign out</NuxtLink>
+        </li>
       </ul>
     </nav>
   </header>
@@ -32,7 +38,13 @@
 <script lang="ts" setup>
 
 const buttonStyle : string = "bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1 transition-all";
+const { loggedIn, clear: clearSession } = useUserSession();
+const router = useRouter();
 
+const logOut = async () => {
+  await clearSession();
+  await router.push('/');
+}
 
 </script>
 

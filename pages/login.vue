@@ -6,7 +6,6 @@ const username = ref("");
 const password = ref("");
 
 async function login() {
-  await clearSession()
   $fetch('/api/luka', {
     method: 'POST',
     body: {
@@ -20,8 +19,7 @@ async function login() {
       console.log('User session set', user.value);
       console.log('User session set', loggedIn.value);
       console.log('User session set', session.value);
-      alert('Logged in!')
-      await router.push('/')
+      await router.push('/carousel')
     }
   })
   .catch((e: Error) => {
