@@ -1,7 +1,7 @@
 <template>
   <header class="row p-3 font-['Inter']">
     <nav class="flex flex-wrap items-center justify-between p-3 z-[3] relative">
-      <NuxtLink to="/" class="flex items-center">
+      <NuxtLink to="/carousel" class="flex items-center">
         <img src="/main_logo.svg" class="align-top" alt="Website logo">
         <h1 class="inline-block text-white ml-2 font-bold text-4xl">MovieFinder</h1>
       </NuxtLink>
@@ -10,13 +10,13 @@
           <NuxtLink to="/login" :class="buttonStyle">Sign in</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/" :class="buttonStyle">Movies</NuxtLink>
+          <NuxtLink to="/carousel" :class="buttonStyle">Movies</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/" :class="buttonStyle">TV Shows</NuxtLink>
+          <NuxtLink to="/carousel" :class="buttonStyle">TV Shows</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/" :class="buttonStyle">People</NuxtLink>
+          <NuxtLink to="/carousel" :class="buttonStyle">People</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/about" :class="buttonStyle">More</NuxtLink>
