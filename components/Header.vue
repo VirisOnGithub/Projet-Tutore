@@ -1,7 +1,7 @@
 <template>
-  <header class="row p-3 font-['Inter']">
+  <header class="row p-3 font-['Inter'] bg-gray-950">
     <nav class="flex flex-wrap items-center justify-between p-3 z-[3] relative">
-      <NuxtLink to="/carousel" class="flex items-center">
+      <NuxtLink to="/" class="flex items-center">
         <img src="/main_logo.svg" class="align-top" alt="Website logo">
         <h1 class="inline-block text-white ml-2 font-bold text-4xl">MovieFinder</h1>
       </NuxtLink>

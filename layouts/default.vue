@@ -1,10 +1,8 @@
 <template>
-  <body>
   <div class="flex-column w-screen h-screen overflow-hidden">
     <Header />
     <slot />
   </div>
-  </body>
 </template>
 
 <script lang="ts" setup>

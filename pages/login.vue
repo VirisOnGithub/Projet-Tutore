@@ -30,8 +30,8 @@ async function login() {
 </script>
 
 <template>
-  <div class="items-center justify-center">
-    <div id="login" class="bg-black rounded shadow flex flex-col justify-between p-5">
+  <div class="flex absolute top-0 left-0 h-screen w-screen items-center justify-center">
+    <div id="login" class="flex flex-col bg-black rounded-lg shadow justify-between p-5 ">
         <fieldset class="">
           <legend class="text-center bold text-2xl">Welcome again!</legend>
           <hr class="mt-5 mb-5">
