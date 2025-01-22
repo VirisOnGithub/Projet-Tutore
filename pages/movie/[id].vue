@@ -64,7 +64,7 @@
 const route = useRoute();
 const isLoading = ref(true);
 let movieInfos: Movie;
-let comments: Comment[];
+let comments: Ref<Comment[] | null> = ref(null);
 
 interface Genres {
   id: number;
@@ -171,8 +171,8 @@ const addComment = async () => {
     }
     const comment = await response.json();
     console.log('Comment inserted:', comment);
-    comments = await fetchComments();
-    console.log(comments)
+    comments.value = await fetchComments();
+    console.log(comments.value)
     return null;
   } catch (error) {
     console.error('Error inserting new comment:', error);
@@ -187,8 +187,8 @@ onMounted(async () => {
   console.log(movieInfos);
 
   console.log('Fetching comments...');
-  comments = await fetchComments();
-  console.log(comments);
+  comments.value = await fetchComments();
+  console.log(comments.value);
 
   isLoading.value = false;
 
