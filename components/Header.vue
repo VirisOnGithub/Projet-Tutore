@@ -7,22 +7,22 @@
       </NuxtLink>
       <ul class="flex">
         <li>
-          <NuxtLink to="/login" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">Sign in</NuxtLink>
+          <NuxtLink to="/login" :class="buttonStyle">Sign in</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">Movies</NuxtLink>
+          <NuxtLink to="/" :class="buttonStyle">Movies</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">TV Shows</NuxtLink>
+          <NuxtLink to="/" :class="buttonStyle">TV Shows</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">People</NuxtLink>
+          <NuxtLink to="/" :class="buttonStyle">People</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/about" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">More</NuxtLink>
+          <NuxtLink to="/about" :class="buttonStyle">More</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/movie/762509" class="bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1">The Lion King</NuxtLink>
+          <NuxtLink to="/movie/762509" :class="buttonStyle">The Lion King</NuxtLink>
         </li>
       </ul>
     </nav>
@@ -30,6 +30,7 @@
 </template>
 
 <script lang="ts" setup>
+const buttonStyle : string = "bg-transparent font-semibold hover:bg-blue-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-blue-700 rounded m-1 transition-all";
 
 </script>
 
