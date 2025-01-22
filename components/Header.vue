@@ -2,7 +2,7 @@
   <header class="row p-3">
     <nav class="flex flex-wrap items-center justify-between p-3 z-[3] relative">
       <NuxtLink to="/" class="flex items-center">
-        <img src="/main_logo.svg" class="align-top">
+        <img src="/main_logo.svg" class="align-top" alt="Website logo">
         <h1 class="inline-block text-white ml-2 font-bold text-4xl">MovieFinder</h1>
       </NuxtLink>
       <ul class="flex">

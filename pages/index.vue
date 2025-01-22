@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import {useHead} from "@unhead/vue";
 
+useHead({titleTemplate: "MovieFinder"});
 </script>
 
 <template>
@@ -16,7 +18,7 @@
         <input class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" required="" placeholder="xX_cooldude69_Xx">
         <label class="text-s font-bold after:content-['*'] after:text-red-400" for="password">Password  </label>
         <input class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" type="password" required="" placeholder="********">
-        <a href="#" class="block text-right text-xs text-indigo-500 text-right mb-4">Forgot Password?</a>
+        <a href="#" class="block text-right text-xs text-indigo-500 mb-4">Forgot Password?</a>
         <button class="w-full rounded bg-blue-600 text-indigo-50 p-2 text-center font-bold hover:bg-blue-500 active:bg-blue-700">Log In</button>
       </fieldset>
     </form>

@@ -45,7 +45,6 @@
             </div>
             <p class="mt-2">{{ comment.content }}</p>
           </div>
-
         </div>
       </div>
     </div>
@@ -53,8 +52,6 @@
 </template>
 
 <script lang="ts" setup>
-import {useHead} from "@unhead/vue";
-import {useRoute} from 'vue-router';
 
 const route = useRoute();
 const isLoading = ref(true);
