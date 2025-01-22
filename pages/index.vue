@@ -8,13 +8,14 @@ const buttonStyle : string = "w-full text-center bg-transparent font-semibold bg
 
 <template>
   <div class="flex h-screen w-screen justify-center items-center">
-    <div id="gray-filter" class="absolute inset-0" style="background: rgba(0, 0, 0, 0.8);"></div>
     <div class="flex flex-col items-center p-5 bg-gray-300 rounded-lg d bg-opacity-30 z-10">
       <div class="flex items-center mb-5">
         <img src="/main_logo.svg" class="inline-block size-24" alt="Website logo">
         <h1 class="inline-block text-white ml-2 font-bold text-7xl">MovieFinder</h1>
       </div>
-      <NuxtLink to="/carousel" :class="buttonStyle">Browse</NuxtLink>
+      <hr>
+      <NuxtLink to="/pages/browse" :class="buttonStyle">Browse</NuxtLink>
+      <hr>
       <NuxtLink to="/login" :class="buttonStyle">Log in</NuxtLink>
     </div>
   </div>
