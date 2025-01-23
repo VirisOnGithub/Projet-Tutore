@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     try {
         const connection = await connectToDatabase();
         return new Promise((resolve, reject) => {
-            connection.query('SELECT id_film FROM watchlater WHERE id_user = ?', [userId], function (error, results) {
+            connection.query('SELECT id_film FROM favourite WHERE id_user = ?', [userId], function (error, results) {
                 if (error) {
                     reject(error);
                     return;
