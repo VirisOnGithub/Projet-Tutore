@@ -25,10 +25,11 @@
           <p id="movieTagline" class="text-lg font-light z-[2]">{{ movieInfos.tagline }}</p>
           <div id="stars" class="flex mb-3 z-[2]">
             <Badge>
-              <StarBadge v-if="movieInfos.vote_average > 0 && hasBeenPublished" :rating="movieInfos.vote_average"/>
-              <span v-else-if="!hasBeenPublished" class="text-lg">No rating</span>
+              <StarBadge v-if="movieInfos.vote_average > 0 && releaseDatePast" :rating="movieInfos.vote_average"/>
+              <span v-else-if="releaseDatePast" class="text-lg">No rating</span>
               <p v-else><i>Ce film sortira prochainement</i></p>
             </Badge>
+            <WatchLaterButton />
           </div>
           <div id="badges" class="mb-3 flex flex-wrap gap-2 z-[2]">
             <Badge v-for="country in movieInfos.production_countries" :key="country.iso_3166_1">
@@ -77,8 +78,9 @@ let movieInfos: Movie;
 let comments: Ref<Comment[] | null> = ref(null);
 const commentaire = ref("");
 const newRating = ref(0);
-let releaseDatePast: Ref<boolean> = ref(null);
 const { loggedIn, session } = useUserSession();
+const id = session.value.user?.id;
+let releaseDatePast: Ref<boolean | null> = ref(null);
 
 interface Genres {
   id: number;
@@ -160,6 +162,26 @@ const fetchComments = async () => {
   }
 };
 
+const addToWatchLater = async () => {
+  try {
+    const response = await fetch('/api/addToWatchLater', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ movieId: route.params.id, userId: id })
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    console.log('Movie added to watchlater list');
+    return null;
+  } catch (error) {
+    console.error('Error adding movie to watchlater list:', error);
+    return null;
+  }
+};
+
 const castDuration = (duration: number): string => {
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
@@ -177,7 +199,7 @@ const addComment = async () => {
         movieId: route.params.id,
         content: commentaire.value,
         rating: newRating.value,
-        userId: session.value.user?.id
+        userId: id
       })
     });
     if (!response.ok) {
@@ -198,7 +220,7 @@ const updateRating = (rating: number) => {
   newRating.value = rating;
 };
 
-const hasBeenPublished = (release_date) => {
+const hasBeenPublished = (release_date : string) => {
   const currDate = new Date();
   const release_dateFilm = new Date(release_date)
   return release_dateFilm <= currDate;
