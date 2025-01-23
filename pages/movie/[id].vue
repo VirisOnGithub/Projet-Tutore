@@ -55,7 +55,7 @@
             <p class="mt-2">{{ comment.content }}</p>
           </div>
         </div>
-        <div class="flex items-center justify-center mt-10">
+        <div v-if="loggedIn" class="flex items-center justify-center mt-10">
           <input v-model="commentaire" type="textarea" class="border border-gray-300 p-2 rounded m-1" placeholder="Votre commentaire">
           <RatingSlider :rating="newRating" @update:rating="updateRating"/>
           <button @click="addComment" class="bg-transparent font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
@@ -76,6 +76,7 @@ let movieInfos: Movie;
 let comments: Ref<Comment[] | null> = ref(null);
 const commentaire = ref("");
 const newRating = ref(0);
+const { loggedIn, session } = useUserSession();
 
 interface Genres {
   id: number;
@@ -174,7 +175,7 @@ const addComment = async () => {
         movieId: route.params.id,
         content: commentaire.value,
         rating: newRating.value,
-        userId: 1
+        userId: session.value.user?.id
       })
     });
     if (!response.ok) {

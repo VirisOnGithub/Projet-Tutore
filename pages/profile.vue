@@ -1,4 +1,5 @@
 <template>
+  <p>{{ username }}</p>
     <p>Liste de favoris</p>
     <p>Liste de films à regarder plus tard</p>
 </template>
