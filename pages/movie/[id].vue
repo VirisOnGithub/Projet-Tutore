@@ -15,7 +15,7 @@
         <img :src="'https://image.tmdb.org/t/p/w1280' + movieInfos.poster_path"
              class="absolute top-[30%] left-[10%] w-[20%] z-[2]"
              id="poster" alt="Poster"/>
-        <div id="movieDetails" class="text-white mt-5 absolute top-[30%] left-[35%] w-[30%] font-['Inter'] z-[2]">
+        <div id="movieDetails" class="text-white mt-5 absolute top-[30%] left-[35%] w-[30%] z-[2]">
           <div id="additionalInformation" class="flex flex-wrap gap-2">
             <Badge>{{ movieInfos.release_date.substring(0, 4) }}</Badge>
             <Badge>{{ movieInfos.genres.map((genre: Genres) => genre.name).join(", ") }}</Badge>

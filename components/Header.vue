@@ -1,5 +1,5 @@
 <template>
-  <header class="row p-3 z-[3] relative font-['Inter'] bg-gray-950">
+  <header class="row p-3 z-[3] relative bg-gray-950">
     <nav class="flex flex-wrap items-center justify-between p-3">
       <NuxtLink to="/" class="flex items-center">
         <img src="/main_logo.svg" class="align-top" alt="Website logo">
