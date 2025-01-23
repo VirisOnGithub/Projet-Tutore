@@ -52,7 +52,7 @@
                 <StarBadge :rating="comment.rating_user"/>
               </Badge>
             </div>
-            <p class="mt-2">{{ comment.content }}</p>
+            <p class="mt-2 break-words">{{ comment.content }}</p>
           </div>
         </div>
         <div v-if="loggedIn" class="flex items-center justify-center mt-10">
