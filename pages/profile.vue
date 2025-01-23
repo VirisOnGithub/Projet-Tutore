@@ -7,7 +7,7 @@
     </div>
     <div class="grid grid-cols-2 grid-rows-2">
       <div class="flex">
-        <NuxtLink to="/" :class="buttonStyle">À regarder plus tard</NuxtLink>
+        <NuxtLink to="/watchLater" :class="buttonStyle">À regarder plus tard</NuxtLink>
       </div>
       <div class="flex">
         <NuxtLink to="/" :class="buttonStyle">Favoris</NuxtLink>
@@ -21,14 +21,6 @@
     </div>
   </div>
   </div>
-  <ul>
-    <li v-for="movie in movieInfosFavorites" :key="movie.id">{{ movie.title }}</li>
-  </ul>
-  <br>
-  <p>Liste de films à regarder plus tard</p>
-  <ul>
-    <li v-for="movie in movieInfosWatchLater" :key="movie.id">{{ movie.title }}</li>
-  </ul>
 </template>
 
 <script setup lang="ts">

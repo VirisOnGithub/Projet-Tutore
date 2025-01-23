@@ -13,7 +13,7 @@
           <NuxtLink to="/login" :class="buttonStyle">Connexion</NuxtLink>
         </li>
         <li v-if="loggedIn">
-          <NuxtLink to="/browse" :class="buttonStyle">À regarder plus tard</NuxtLink>
+          <NuxtLink to="/watchLater" :class="buttonStyle">À regarder plus tard</NuxtLink>
         </li>
         <li v-if="loggedIn">
           <NuxtLink to="/browse" :class="buttonStyle">Favoris</NuxtLink>
