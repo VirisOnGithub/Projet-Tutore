@@ -1,7 +1,7 @@
 <template>
   <header class="row p-3 z-[3] relative bg-gray-950">
     <nav class="flex flex-wrap items-center justify-between p-3">
-      <NuxtLink to="/" class="flex items-center">
+      <NuxtLink to="/browse" class="flex items-center">
         <img src="/main_logo.svg" class="align-top" alt="Website logo">
         <h1 class="inline-block text-white ml-2 font-bold text-4xl">MovieFinder</h1>
       </NuxtLink>
@@ -10,16 +10,13 @@
           <NuxtLink to="/profile" :class="buttonStyle">Profil</NuxtLink>
         </li>
         <li v-else>
-          <NuxtLink to="/login" :class="buttonStyle">Se Connecter</NuxtLink>
+          <NuxtLink to="/login" :class="buttonStyle">Connexion</NuxtLink>
         </li>
-        <li>
-          <NuxtLink to="/browse" :class="buttonStyle">Films</NuxtLink>
+        <li v-if="loggedIn">
+          <NuxtLink to="/browse" :class="buttonStyle">À regarder plus tard</NuxtLink>
         </li>
-        <li>
-          <NuxtLink to="/browse" :class="buttonStyle">Séries TV</NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/browse" :class="buttonStyle">People</NuxtLink>
+        <li v-if="loggedIn">
+          <NuxtLink to="/browse" :class="buttonStyle">Favoris</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/about" :class="buttonStyle">Plus</NuxtLink>
@@ -28,7 +25,7 @@
           <NuxtLink to="/movie/762509" :class="buttonStyle">Le Roi Lion</NuxtLink>
         </li>
         <li v-if="loggedIn">
-          <NuxtLink @click="logOut" :class="buttonStyle" class="cursor-pointer">Se Déconnecter</NuxtLink>
+          <NuxtLink @click="logOut" :class="buttonStyle" class="cursor-pointer">Déconnexion</NuxtLink>
         </li>
       </ul>
     </nav>
