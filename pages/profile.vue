@@ -1,4 +1,5 @@
 <template>
+    <UserIcon />
   <p>{{ username }}</p>
   <br>
   <p>Liste de favoris</p>
@@ -10,6 +11,7 @@
   <ul>
     <li v-for="movie in movieInfosWatchLater" :key="movie.id">{{ movie.title }}</li>
   </ul>
+  <NuxtLink to="/login" :class="buttonStyle">Supprimer le compte</NuxtLink>
 </template>
 
 <script setup lang="ts">
@@ -136,6 +138,8 @@ onMounted(async () => {
     movieInfosFavorites.value[i] = await fetchMovieInfos(favorites.value[i]);
   }
 });
+
+const buttonStyle : string = "w-full text-center bg-transparent font-semibold bg-violet-600 hover:bg-violet-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-violet-700 rounded m-1 transition-all";
 
 </script>
 
