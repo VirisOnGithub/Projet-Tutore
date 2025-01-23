@@ -23,10 +23,11 @@
           </div>
           <h1 id="movieTitle" class="font-bold text-3xl z-[2]">{{ movieInfos.title }}</h1>
           <p id="movieTagline" class="text-lg font-light z-[2]">{{ movieInfos.tagline }}</p>
-          <div id="stars" v-if="hasBeenPublished" class="flex mb-3 z-[2]">
+          <div id="stars" class="flex mb-3 z-[2]">
             <Badge>
-              <StarBadge v-if="movieInfos.vote_average > 0" :rating="movieInfos.vote_average"/>
+              <StarBadge v-if="movieInfos.vote_average > 0 && hasBeenPublished" :rating="movieInfos.vote_average"/>
               <span v-else-if="!hasBeenPublished" class="text-lg">No rating</span>
+              <p v-else><i>Ce film sortira prochainement</i></p>
             </Badge>
           </div>
           <div id="badges" class="mb-3 flex flex-wrap gap-2 z-[2]">
