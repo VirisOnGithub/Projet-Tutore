@@ -10,11 +10,11 @@ export default defineEventHandler(async () => {
                     reject(error);
                     return;
                 }
-                console.log('The solution is: ', results[0]);
-                resolve(results[0]);
+                const usernames = results.map((result: { username: string }) => result.user_name);
+                resolve(usernames);
             });
         });
     } catch (error) {
-        throw createError({statusCode: 500, message: 'Database query failed'});
+        throw createError({ statusCode: 500, message: 'Database query failed' });
     }
 });

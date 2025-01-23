@@ -6,7 +6,34 @@ const password = ref("");
 const passwordConfirmed = ref("");
 const passwordError = ref(''); 
 
+const fetchUser = async () => {
+  try {
+    const response = await fetch('/api/getUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+    return null;
+  }
+};
+
+
+
 async function createAccount() {
+  const response = await fetchUser();
+  for (const user of response) {
+    if (user === username.value) {
+      passwordError.value = 'Ce nom d\'utilisateur est déjà pris';
+      return;
+    }
+  }
   if (password.value !== passwordConfirmed.value) {
     passwordError.value = 'La vérification des mots de passe a échoué';
     return;
