@@ -7,7 +7,7 @@
       </NuxtLink>
       <ul class="flex">
         <li v-if="loggedIn">
-          <NuxtLink to="/browse" :class="buttonStyle">Profile</NuxtLink>
+          <NuxtLink to="/profile" :class="buttonStyle">Profile</NuxtLink>
         </li>
         <li v-else>
           <NuxtLink to="/login" :class="buttonStyle">Log in</NuxtLink>

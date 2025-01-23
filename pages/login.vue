@@ -18,7 +18,7 @@ async function login() {
     if (loggedIn.value) {
       console.log('User session set', user.value);
       console.log('User session set', loggedIn.value);
-      console.log('User session set', session.value);
+      console.log('User session set', session.value.user);
       await router.push('/browse')
     }
   })

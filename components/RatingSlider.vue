@@ -38,6 +38,7 @@ const updateRating = (event: Event) => {
 /* From Uiverse.io by satisshTechie */ 
 .PB-range-slider {
   -webkit-appearance: none;
+  appearance: none;
   width: 100%;
   height: 4px;
   border-radius: 5px;
@@ -54,7 +55,7 @@ const updateRating = (event: Event) => {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #000000;
+  background-color: white;
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
