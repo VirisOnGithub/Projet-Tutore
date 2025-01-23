@@ -16,7 +16,7 @@ const buttonStyle : string = "w-full text-center bg-transparent font-semibold bg
       <hr>
       <NuxtLink to="/browse" :class="buttonStyle">Parcourir</NuxtLink>
       <hr>
-      <NuxtLink to="/login" :class="buttonStyle">Se Connecter</NuxtLink>
+      <NuxtLink to="/login" :class="buttonStyle">Connexion</NuxtLink>
     </div>
   </div>
 </template>

@@ -1,8 +1,26 @@
 <template>
-    <UserIcon />
-  <p>{{ username }}</p>
-  <br>
-  <p>Liste de favoris</p>
+  <div class="flex w-screen justify-center">
+  <div class="grid grid-cols-2 gap-2 p-5 w-3/4">
+    <div class="flex items-center justify-start">
+      <UserIcon />
+      <p class="font-bold text-8xl ml-4">{{ username }}</p>
+    </div>
+    <div class="grid grid-cols-2 grid-rows-2">
+      <div class="flex">
+        <NuxtLink to="/" :class="buttonStyle">À regarder plus tard</NuxtLink>
+      </div>
+      <div class="flex">
+        <NuxtLink to="/" :class="buttonStyle">Favoris</NuxtLink>
+      </div>
+      <div class="flex">
+        <NuxtLink to="/" :class="buttonStyle">Commentaires</NuxtLink>
+      </div>
+      <div class="flex">
+        <NuxtLink to="/login" :class="buttonStyle" @click="deleteAccount">Supprimer le compte</NuxtLink>
+      </div>
+    </div>
+  </div>
+  </div>
   <ul>
     <li v-for="movie in movieInfosFavorites" :key="movie.id">{{ movie.title }}</li>
   </ul>
@@ -11,7 +29,6 @@
   <ul>
     <li v-for="movie in movieInfosWatchLater" :key="movie.id">{{ movie.title }}</li>
   </ul>
-  <NuxtLink to="/" :class="buttonStyle" @click="deleteAccount">Supprimer le compte</NuxtLink>
 </template>
 
 <script setup lang="ts">

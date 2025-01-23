@@ -61,17 +61,17 @@ async function createAccount() {
             <legend class="text-center bold text-2xl">Créez votre compte</legend>
             <hr class="mt-5 mb-5">
             <label class="text-s font-bold after:content-['*'] after:text-red-400" for="email">Nom d&apos;utilisateur</label>
-            <input v-model="username" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" required
+            <input v-model="username" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-violet-500" required
                    placeholder="Quel sera votre nom d&apos;utilisateur ?" id="email" type="text">
             <label class="text-s font-bold after:content-['*'] after:text-red-400" for="password">Mot de passe</label>
-            <input v-model="password" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" type="password"
+            <input v-model="password" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-violet-500" type="password"
                    required placeholder="********" id="password">
             <label class="text-s font-bold after:content-['*'] after:text-red-400" for="password">Confirmation du mot de passe</label>
-            <input v-model="passwordConfirmed" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-blue-500" type="password"
+            <input v-model="passwordConfirmed" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-violet-500" type="password"
                    required placeholder="********" id="passwordConfirmed">
             <p v-if="passwordError" class="text-red-500 text-xs mt-1">{{ passwordError }}</p>
             <button @click="createAccount"
-                class="w-full rounded bg-blue-600 text-indigo-50 p-2 text-center font-bold hover:bg-blue-500 active:bg-blue-700">
+                class="w-full rounded bg-violet-600 text-indigo-50 p-2 text-center font-bold hover:bg-violet-500 active:bg-violet-700">
               Créer le compte
             </button>
           </fieldset>
