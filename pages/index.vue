@@ -3,6 +3,8 @@ definePageMeta({
   layout: 'welcome-screen',
 });
 
+const { loggedIn } = useUserSession();
+
 const buttonStyle : string = "w-full text-center bg-transparent font-semibold bg-violet-600 hover:bg-violet-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-violet-700 rounded m-1 transition-all";
 </script>
 
@@ -16,7 +18,7 @@ const buttonStyle : string = "w-full text-center bg-transparent font-semibold bg
       <hr>
       <NuxtLink to="/browse" :class="buttonStyle">Parcourir</NuxtLink>
       <hr>
-      <NuxtLink to="/login" :class="buttonStyle">Connexion</NuxtLink>
+      <NuxtLink to="/login" :class="buttonStyle" v-if="!loggedIn">Connexion</NuxtLink>
     </div>
   </div>
 </template>
