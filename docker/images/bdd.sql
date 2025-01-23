@@ -12,7 +12,7 @@ create table comment (
 create table user (
    id_user       int primary key AUTO_INCREMENT,
    user_name     varchar(42),
-   user_password varchar(42)
+   user_password varchar(200)
 );
 
 create table favourite (
