@@ -226,7 +226,7 @@ const addComment = async () => {
         movieId: route.params.id,
         content: commentaire.value,
         rating: newRating.value,
-        userId: 1
+        userId: id
       })
     });
     if (!response.ok) {

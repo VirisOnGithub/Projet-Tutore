@@ -11,7 +11,7 @@
   <ul>
     <li v-for="movie in movieInfosWatchLater" :key="movie.id">{{ movie.title }}</li>
   </ul>
-  <NuxtLink to="/login" :class="buttonStyle">Supprimer le compte</NuxtLink>
+  <NuxtLink to="/" :class="buttonStyle" @click="deleteAccount">Supprimer le compte</NuxtLink>
 </template>
 
 <script setup lang="ts">
@@ -55,7 +55,7 @@ interface Movie {
   vote_count: number
 }
 
-const { session } = useUserSession();
+const { session, clear: clearSession } = useUserSession();
 const user: userConnected = { username: session.value.user?.username, id: session.value.user?.id };
 const username = user.username;
 const id = user.id;
@@ -125,6 +125,25 @@ const fetchMovieInfos = async (id_film: any) => {
   } catch (error) {
     console.error('Error fetching movie infos:', error);
     return null;
+  }
+}
+
+const deleteAccount = async () => {
+  try {
+    const response = await fetch('/api/deleteAccount', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId: id })
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    console.log('Account deleted');
+    clearSession();
+  } catch (error) {
+    console.error('Error deleting account:', error);
   }
 }
   
