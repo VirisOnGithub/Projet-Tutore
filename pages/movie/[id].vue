@@ -15,48 +15,18 @@
         <img :src="'https://image.tmdb.org/t/p/w1280' + movieInfos.poster_path"
              class="absolute top-[30%] left-[10%] w-[20%] z-[2]"
              id="poster" alt="Poster"/>
-        <div id="movieDetails" class="text-white mt-5 absolute top-[30%] left-[35%] w-[30%] font-['Inter'] z-[2]">
+        <div id="movieDetails" class="text-white mt-5 absolute top-[30%] left-[35%] w-[30%] z-[2]">
           <div id="additionalInformation" class="flex flex-wrap gap-2">
             <Badge>{{ movieInfos.release_date.substring(0, 4) }}</Badge>
             <Badge>{{ movieInfos.genres.map((genre: Genres) => genre.name).join(", ") }}</Badge>
             <Badge>{{ castDuration(movieInfos.runtime) }}</Badge>
           </div>
-          <div class="flex items-center gap-4">
-            <h1 id="movieTitle" class="font-bold text-3xl z-[2]">{{ movieInfos.title }}</h1>
-            <button
-              @click="addToWatchLater"
-              class="rounded-lg relative w-56 h-10 cursor-pointer flex items-center border border-black-500 bg-black-500 group hover:bg-black-600 active:bg-black-700"
-            >
-              <span
-                class="text-gray-200 font-semibold ml-4 transition-all duration-300"
-                >Add to watchlater list</span
-              >
-              <span
-                class="absolute right-0 h-full w-10 rounded-lg bg-black-500 flex items-center justify-center transition-all duration-300 group-hover:bg-black-600 group-active:bg-black-700"
-              >
-                <svg
-                  class="svg w-8 text-white"
-                  fill="none"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <line x1="12" x2="12" y1="5" y2="19"></line>
-                  <line x1="5" x2="19" y1="12" y2="12"></line>
-                </svg>
-              </span>
-            </button>
-          </div>
+          <h1 id="movieTitle" class="font-bold text-3xl z-[2]">{{ movieInfos.title }}</h1>
           <p id="movieTagline" class="text-lg font-light z-[2]">{{ movieInfos.tagline }}</p>
-          <div id="stars" class="flex mb-3 z-[2]">
+          <div id="stars" v-if="hasBeenPublished" class="flex mb-3 z-[2]">
             <Badge>
               <StarBadge v-if="movieInfos.vote_average > 0" :rating="movieInfos.vote_average"/>
-              <span v-else class="text-lg">No rating</span>
+              <span v-else-if="!hasBeenPublished" class="text-lg">No rating</span>
             </Badge>
           </div>
           <div id="badges" class="mb-3 flex flex-wrap gap-2 z-[2]">
@@ -82,13 +52,13 @@
                 <StarBadge :rating="comment.rating_user"/>
               </Badge>
             </div>
-            <p class="mt-2">{{ comment.content }}</p>
+            <p class="mt-2 break-words">{{ comment.content }}</p>
           </div>
         </div>
-        <div class="flex items-center justify-center mt-10">
-          <input v-model="commentaire" type="textarea" class="border border-gray-300 p-2 rounded m-1" placeholder="Votre commentaire">
+        <div v-if="loggedIn" class="flex items-center justify-center mt-10">
+          <textarea v-model="commentaire" class="border border-gray-300 p-2 rounded m-1" placeholder="Votre commentaire"/>
           <RatingSlider :rating="newRating" @update:rating="updateRating"/>
-          <button @click="addComment" class="bg-transparent font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
+          <button @click="addComment" class="bg-transparent border-2 border-green-500 font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
         </div>
       </div>
     </div>
@@ -101,13 +71,13 @@ definePageMeta({
 });
 
 const route = useRoute();
-const { session } = useUserSession();
 const isLoading = ref(true);
 let movieInfos: Movie;
 let comments: Ref<Comment[] | null> = ref(null);
 const commentaire = ref("");
 const newRating = ref(0);
-const id = session.value.user?.id;
+let releaseDatePast: Ref<boolean> = ref(null);
+const { loggedIn, session } = useUserSession();
 
 interface Genres {
   id: number;
@@ -189,26 +159,6 @@ const fetchComments = async () => {
   }
 };
 
-const addToWatchLater = async () => {
-  try {
-    const response = await fetch('/api/addToWatchLater', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ movieId: route.params.id, userId: id })
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    console.log('Movie added to watchlater list');
-    return null;
-  } catch (error) {
-    console.error('Error adding movie to watchlater list:', error);
-    return null;
-  }
-};
-
 const castDuration = (duration: number): string => {
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
@@ -226,7 +176,7 @@ const addComment = async () => {
         movieId: route.params.id,
         content: commentaire.value,
         rating: newRating.value,
-        userId: id
+        userId: session.value.user?.id
       })
     });
     if (!response.ok) {
@@ -247,6 +197,12 @@ const updateRating = (rating: number) => {
   newRating.value = rating;
 };
 
+const hasBeenPublished = (release_date) => {
+  const currDate = new Date();
+  const release_dateFilm = new Date(release_date)
+  return release_dateFilm <= currDate;
+}
+
 onMounted(async () => {
   console.log('Fetching movie infos...');
   movieInfos = await fetchMovieInfos();
@@ -256,6 +212,10 @@ onMounted(async () => {
   console.log('Fetching comments...');
   comments.value = await fetchComments();
   console.log(comments.value);
+
+  console.log("Checking release date...")
+  releaseDatePast.value = hasBeenPublished(movieInfos.release_date)
+  console.log(releaseDatePast.value)
 
   isLoading.value = false;
 
