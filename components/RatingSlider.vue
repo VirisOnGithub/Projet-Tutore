@@ -31,7 +31,7 @@ const updateRating = (event: Event) => {
   <div class="PB-range-slider-div">
     <input type="range" min="0" :max="maxRating" v-model="localRating" @input="updateRating" class="PB-range-slider">
     <span class="pl-2 font-medium text-yellow-400">{{ localRating }}</span>
-    </div>
+  </div>
 </template>
 
 <style scoped>

@@ -7,28 +7,28 @@
       </NuxtLink>
       <ul class="flex">
         <li v-if="loggedIn">
-          <NuxtLink to="/profile" :class="buttonStyle">Profile</NuxtLink>
+          <NuxtLink to="/profile" :class="buttonStyle">Profil</NuxtLink>
         </li>
         <li v-else>
-          <NuxtLink to="/login" :class="buttonStyle">Log in</NuxtLink>
+          <NuxtLink to="/login" :class="buttonStyle">Se Connecter</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/browse" :class="buttonStyle">Movies</NuxtLink>
+          <NuxtLink to="/browse" :class="buttonStyle">Films</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/browse" :class="buttonStyle">TV Shows</NuxtLink>
+          <NuxtLink to="/browse" :class="buttonStyle">Séries TV</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/browse" :class="buttonStyle">People</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/about" :class="buttonStyle">More</NuxtLink>
+          <NuxtLink to="/about" :class="buttonStyle">Plus</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/movie/762509" :class="buttonStyle">The Lion King</NuxtLink>
+          <NuxtLink to="/movie/762509" :class="buttonStyle">Le Roi Lion</NuxtLink>
         </li>
         <li v-if="loggedIn">
-          <NuxtLink @click="logOut" :class="buttonStyle" class="cursor-pointer">Log out</NuxtLink>
+          <NuxtLink @click="logOut" :class="buttonStyle" class="cursor-pointer">Se Déconnecter</NuxtLink>
         </li>
       </ul>
     </nav>

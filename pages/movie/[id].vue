@@ -56,9 +56,9 @@
           </div>
         </div>
         <div v-if="loggedIn" class="flex items-center justify-center mt-10">
-          <input v-model="commentaire" type="textarea" class="border border-gray-300 p-2 rounded m-1" placeholder="Votre commentaire">
+          <textarea v-model="commentaire" class="border border-gray-300 p-2 rounded m-1" placeholder="Votre commentaire"/>
           <RatingSlider :rating="newRating" @update:rating="updateRating"/>
-          <button @click="addComment" class="bg-transparent font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
+          <button @click="addComment" class="bg-transparent border-2 border-green-500 font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
         </div>
       </div>
     </div>

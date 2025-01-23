@@ -14,9 +14,9 @@ const buttonStyle : string = "w-full text-center bg-transparent font-semibold bg
         <h1 class="inline-block text-white ml-2 font-bold text-7xl">MovieFinder</h1>
       </div>
       <hr>
-      <NuxtLink to="/browse" :class="buttonStyle">Browse</NuxtLink>
+      <NuxtLink to="/browse" :class="buttonStyle">Parcourir</NuxtLink>
       <hr>
-      <NuxtLink to="/login" :class="buttonStyle">Log in</NuxtLink>
+      <NuxtLink to="/login" :class="buttonStyle">Se Connecter</NuxtLink>
     </div>
   </div>
 </template>
