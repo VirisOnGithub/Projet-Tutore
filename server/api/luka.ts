@@ -1,3 +1,4 @@
+import { verify } from 'crypto';
 import { connectToDatabase } from './getBdd';
 import { z } from 'zod';
 
@@ -12,11 +13,11 @@ interface User {
     user_password: string
 }
 
-async function luka(username: string, password: string): Promise<User> {
+async function luka(username: string): Promise<User> {
     try {
         const connection = await connectToDatabase();
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * from user where user_name=? and user_password=?', [username, password], function (error, results) {
+            connection.query('SELECT * from user where user_name=?', [username], function (error, results) {
                 if (error) {
                     reject(error);
                     return;
@@ -35,16 +36,9 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const username = body.username;
     const password = body.password;
-    const user: User = await luka(username, password);
-    console.log(user);
+    const user: User = await luka(username);
 
-    console.log('username', username);
-    console.log('password', password);
-
-    console.log('user.user_name', user.user_name);
-    console.log('user.user_password', user.user_password);
-
-    if (username === user.user_name && password === user.user_password) {
+    if (username === user.user_name && (await verifyPassword(user.user_password, password))) {
         console.log('User connected');
         console.log(await getUserSession(event));
         await setUserSession(event, {

@@ -4,11 +4,12 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const username = body.username;
     const password = body.password;
+    const hashedPassword = await hashPassword(password);
 
     try {
         const connection = await connectToDatabase();
         return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO user (user_name, user_password) VALUES (?, ?)', [username, password], function (error, results) {
+            connection.query('INSERT INTO user (user_name, user_password) VALUES (?, ?)', [username, hashedPassword], function (error, results) {
                 if (error) {
                     reject(error);
                     return;
