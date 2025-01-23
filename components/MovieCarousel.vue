@@ -1,24 +1,30 @@
 <template>
   <div v-if="isLoading" class="flex justify-center items-center h-72 text-2xl">Loading...</div>
-  <Carousel v-else v-bind="carouselConfig">
-    <Slide v-for="poster in paths" :key="poster.id">
-      <NuxtLink :to="'/movie/' + poster.id">
-        <div class="carousel__item"><img class="w-72"
-                                         :src="'http://image.tmdb.org/t/p/w600_and_h900_bestv2' + poster.path"/></div>
-      </NuxtLink>
-    </Slide>
-  </Carousel>
+  <UCarousel v-else :items="paths" :config="carouselConfig" arrows>
+    <template #default="{ item }">
+      <div class="carousel__item">
+        <img :src="'https://image.tmdb.org/t/p/w500' + item.path" :alt="item.id" class="w-1/2">
+      </div>
+    </template>
+  </UCarousel>
 </template>
 
 <script lang="ts" setup>
-import {ref, onMounted} from 'vue';
 
-const carouselConfig = {
-  itemsToShow: 5,
-  wrapAround: true
+interface Movie {
+  id: number;
+  path: string;
 }
 
-const paths = ref<any[]>([]);
+const carouselConfig = {
+  itemsToShow: 2,
+  wrapAround: true,
+  autoplay: true,
+  autoplayTimeout: 3000,
+  pauseAutoplayOnHover: true,
+};
+
+const paths = ref<{ id: number; path: string }[]>([]);
 const isLoading = ref(true);
 
 const fetchPosters = async () => {
@@ -43,7 +49,7 @@ const fetchPosters = async () => {
 onMounted(async () => {
   console.log('Fetching posters...');
   const trendings = await fetchPosters();
-  paths.value = trendings.results.map((data: any) => ({path: data.poster_path, id: data.id}));
+  paths.value = trendings.results.map((data: any) => ({ path: data.poster_path, id: data.id }));
   isLoading.value = false;
 });
 </script>
