@@ -7,18 +7,25 @@
       </div>
     </div>
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <WatchLaterCard v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie"/>
+      <WatchLaterCard v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie" @add-to-favourite-list="(id) => oui(id)"/>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 interface Movie {
-  title: string;
-  poster_path: string;
-  vote_average: number;
-  runtime: number;
+    title: string;
+    poster_path: string;
+    vote_average: number;
+    runtime: number;
+    id: number;
+    release_date: string;
+    genres: Genres[];
+}
+
+interface Genres {
   id: number;
+  name: string;
 }
 
 const isLoading = ref(true);
@@ -61,6 +68,11 @@ const fetchMovieInfos = async (id_film: number) => {
     console.error('Error fetching movie infos:', error);
     return null;
   }
+};
+
+const oui = (id: number) => {
+  console.log('oui');
+  movieInfosWatchLater.value = movieInfosWatchLater.value.filter((movie) => movie.id !== id);
 };
 
 onMounted(async () => {
