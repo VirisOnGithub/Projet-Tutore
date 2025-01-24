@@ -49,7 +49,7 @@ onMounted(async () => {
   >
               <span
                   class="text-inherit font-semibold ml-4 transition-all duration-300"
-              >Add to favoutite list</span
+              >Add to favourite list</span
               >
     <span
         class="absolute right-0 h-full w-10 rounded-lg bg-black-500 flex items-center justify-center transition-all duration-300 group-hover:bg-black-600 group-active:bg-black-700"
