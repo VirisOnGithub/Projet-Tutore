@@ -44,12 +44,12 @@ onMounted(async () => {
 <template>
   <button
       @click="addToFavouriteList"
-      class="rounded-lg relative w-56 h-8 cursor-pointer flex items-center border border-black-500 bg-black-500 group hover:bg-black-600 active:bg-black-700 text-gray-100 hover:text-[#202020] hover:bg-gray-100"
+      class="rounded-xl ml-2 relative w-52 h-6 cursor-pointer flex items-center border border-black-500 bg-black-500 group hover:bg-black-600 active:bg-black-700 text-gray-100 hover:text-[#202020] hover:bg-gray-100"
   >
     <span
         class="text-inherit font-semibold ml-4 transition-all duration-300"
     >
-      Add to favourite list
+      Ajouter aux favoris
     </span>
     <span
         class="absolute right-0 h-full w-10 rounded-lg bg-black-500 flex items-center justify-center transition-all duration-300 group-hover:bg-black-600 group-active:bg-black-700"
