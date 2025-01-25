@@ -26,8 +26,8 @@ const addToFavouriteList = async (event : Event) => {
         throw new Error(`HTTP error! status: ${response.status}`);
         }
         console.log('Movie added to favoutite list');
-        router.go(0);
-        // emit('addToFavouriteList', props.id);
+        // router.go(0);
+        emit('addToFavouriteList', props.id);
         return null;
     } catch (error) {
         console.error('Error adding movie to watchlater list:', error);

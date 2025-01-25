@@ -4,6 +4,12 @@ const castDuration = (duration: number): string => {
     return `${hours}h${minutes}m`;
 }
 
+const hasBeenPublished = (release_date : string) => {
+    const currDate = new Date();
+    const release_dateFilm = new Date(release_date)
+    return release_dateFilm <= currDate;
+}
+
 const movieGenres = [
     {
         "id": 28,
@@ -83,4 +89,4 @@ const movieGenres = [
     }
 ];
 
-export { castDuration, movieGenres };
+export { castDuration, hasBeenPublished, movieGenres };

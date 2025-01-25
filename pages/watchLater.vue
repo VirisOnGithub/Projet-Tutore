@@ -6,8 +6,8 @@
         <div class="w-10 h-10 border-4 border-t-white border-gray-600 rounded-full animate-spin"></div>
       </div>
     </div>
-    <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <WatchLaterCard v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie" @add-to-favourite-list="(id) => oui(id)"/>
+    <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-x-48 mx-auto place-content-center lg:mx-32 xl:mx-60 2xl:mx-96">
+      <WatchLaterCard v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie" @add-to-favourite-list="(id) => filterWatchList(id)"/>
     </div>
   </div>
 </template>
@@ -70,7 +70,7 @@ const fetchMovieInfos = async (id_film: number) => {
   }
 };
 
-const oui = (id: number) => {
+const filterWatchList = (id: number) => {
   console.log('oui');
   movieInfosWatchLater.value = movieInfosWatchLater.value.filter((movie) => movie.id !== id);
 };
