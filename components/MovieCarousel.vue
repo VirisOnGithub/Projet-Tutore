@@ -3,7 +3,9 @@
   <UCarousel v-else :items="paths" :config="carouselConfig" arrows>
     <template #default="{ item }">
       <div class="carousel__item">
-        <img :src="'https://image.tmdb.org/t/p/w500' + item.path" :alt="item.id" class="w-1/2">
+        <NuxtLink :to="'/movie/' + item.id">
+          <img :src="'https://image.tmdb.org/t/p/w500' + item.path" :alt="item.id" class="w-1/2">
+        </NuxtLink>
       </div>
     </template>
   </UCarousel>

@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     const movieId = body.movieId;
 
     if (!movieId) {
-        return sendRedirect(event, "/error-page");
+        return sendRedirect(event, "/404");
     }
 
     try {

@@ -6,10 +6,10 @@ export default defineEventHandler(async (event) => {
     const userId = body.userId;
 
     if (!movieId) {
-        return sendRedirect(event, "/error-page");
+        return sendRedirect(event, "/404");
     }
     if (!userId) {
-        return sendRedirect(event, "/error-page");
+        return sendRedirect(event, "/404");
     }
 
     try {
