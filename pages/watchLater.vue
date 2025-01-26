@@ -1,13 +1,14 @@
 <template>
-  <div class="p-5 h-fit">
-    <h1 class="text-3xl font-bold mb-5">À regarder plus tard</h1>
+  <div class="p-5 overflow-auto h-screen">
+    <h1 class="text-3xl font-bold mb-10">À regarder plus tard</h1>
     <div v-if="isLoading" class="loading">
       <div class="absolute top-1/2 left-1/2 translate-y-1/2 translate-x-1/2">
         <div class="w-10 h-10 border-4 border-t-white border-gray-600 rounded-full animate-spin"></div>
       </div>
     </div>
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-x-48 mx-auto lg:mx-32 xl:mx-60 2xl:mx-96">
-      <WatchLaterCard v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie" @add-to-favourite-list="(id) => filterWatchList(id)"/>
+      <WatchLaterCard v-if="movieInfosWatchLater.length !== 0" v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie" @add-to-favourite-list="(id) => filterWatchList(id)"/>
+      <div v-else class="text-center text-2xl font-bold">Aucun film à regarder plus tard</div>
     </div>
   </div>
 </template>

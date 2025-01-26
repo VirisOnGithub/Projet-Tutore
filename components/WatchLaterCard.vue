@@ -1,5 +1,5 @@
 <template>
-  <div @click="goToMoviePage" class="bg-[#202020] border border-white p-5 rounded-lg cursor-pointer transition-transform transform hover:scale-105 h-44 mt-32" style="width: 600px">
+  <div @click="goToMoviePage" class="bg-[#202020] border border-white p-5 rounded-lg cursor-pointer transition-transform transform hover:scale-105 h-44 my-16" style="width: 600px">
     <div class="flex items-start">
       <img :src="'https://image.tmdb.org/t/p/w1280' + movie.poster_path" alt="Poster" class="h-60 mr-4 relative -top-28 border border-white rounded-lg">
       <div>
