@@ -1,18 +1,21 @@
 <template>
-  <div class="p-5">
+  <div class="p-5 h-fit">
     <h1 class="text-3xl font-bold mb-5">À regarder plus tard</h1>
     <div v-if="isLoading" class="loading">
       <div class="absolute top-1/2 left-1/2 translate-y-1/2 translate-x-1/2">
         <div class="w-10 h-10 border-4 border-t-white border-gray-600 rounded-full animate-spin"></div>
       </div>
     </div>
-    <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-x-48 mx-auto place-content-center lg:mx-32 xl:mx-60 2xl:mx-96">
+    <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-x-48 mx-auto lg:mx-32 xl:mx-60 2xl:mx-96">
       <WatchLaterCard v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie" @add-to-favourite-list="(id) => filterWatchList(id)"/>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+
+useHead({titleTemplate: "À regarder plus tard"});
+
 interface Movie {
     title: string;
     poster_path: string;
@@ -30,7 +33,7 @@ interface Genres {
 
 const isLoading = ref(true);
 const movieInfosWatchLater = ref<Movie[]>([]);
-const { session } = useUserSession();
+const { user } = useUserSession();
 
 const fetchWatchLaterMovies = async () => {
   try {
@@ -39,7 +42,7 @@ const fetchWatchLaterMovies = async () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ userId: session.value.user?.id })
+      body: JSON.stringify({ userId: user.value?.id })
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

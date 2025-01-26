@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-
+useHead({titleTemplate: "Parcourir les films"});
 </script>
 
 <style scoped>

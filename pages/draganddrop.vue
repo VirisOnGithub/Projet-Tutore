@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const { loggedIn, user, fetch: refreshSession , clear: clearSession, session } = useUserSession()
 const router = useRouter()
-if(!loggedIn.value){
-  router.push('/login')
-}
+
+useHead({titleTemplate: "Drag and Drop"});
+
 const circleStyle = "height: 20vh; width: 20vh;"
 
 const trendings = await $fetch("/api/getTrendingMovies");

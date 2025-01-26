@@ -4,7 +4,9 @@ const router = useRouter()
 const username = ref("");
 const password = ref("");
 const passwordConfirmed = ref("");
-const passwordError = ref(''); 
+const passwordError = ref('');
+
+useHead({titleTemplate: "Création de compte"});
 
 const fetchUser = async () => {
   try {

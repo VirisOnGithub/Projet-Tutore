@@ -2,6 +2,8 @@
 const { loggedIn, user, fetch: refreshSession , clear: clearSession, session } = useUserSession()
 const router = useRouter()
 
+useHead({titleTemplate: "Connexion"});
+
 const username = ref("");
 const password = ref("");
 

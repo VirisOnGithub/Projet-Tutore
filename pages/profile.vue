@@ -24,6 +24,9 @@
 </template>
 
 <script setup lang="ts">
+import {checkConnected} from "~/composables/connection";
+
+useHead({titleTemplate: "Profil"});
 
 interface Genres {
   id: number;
@@ -73,6 +76,8 @@ const movieInfosWatchLater = ref<Movie[]>([]);
 const favorites = ref<any[]>([]);
 const movieInfosFavorites = ref<Movie[]>([]);
 const route = useRoute();
+
+checkConnected();
 
 
 

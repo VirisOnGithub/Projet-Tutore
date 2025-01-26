@@ -5,6 +5,8 @@ definePageMeta({
   layout: 'welcome-screen',
 });
 
+useHead({titleTemplate: "Page introuvable"});
+
 const router = useRouter();
 
 const goHome = () => {
