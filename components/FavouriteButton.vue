@@ -10,7 +10,7 @@ const props = defineProps(
         }
     }
 );
-const emit = defineEmits(['addToFavouriteList']);
+const emit = defineEmits(['removeFromWatchLater']);
 
 const addToFavouriteList = async (event : Event) => {
     event.stopPropagation();
@@ -25,9 +25,9 @@ const addToFavouriteList = async (event : Event) => {
         if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
         }
-        console.log('Movie added to favoutite list');
+        console.log('Movie added to favourite list');
         // router.go(0);
-        emit('addToFavouriteList', props.id);
+        emit('removeFromWatchLater', props.id);
         return null;
     } catch (error) {
         console.error('Error adding movie to watchlater list:', error);
@@ -44,32 +44,14 @@ onMounted(async () => {
 <template>
   <button
       @click="addToFavouriteList"
-      class="rounded-xl ml-2 relative w-52 h-6 cursor-pointer flex items-center border border-black-500 bg-black-500 group hover:bg-black-600 active:bg-black-700 text-gray-100 hover:text-[#202020] hover:bg-gray-100"
+      class="rounded-xl relative  h-6 cursor-pointer flex items-center border border-black-500 bg-black-500 group hover:bg-black-600 active:bg-black-700 text-gray-100 hover:text-[#202020] hover:bg-gray-100"
   >
     <span
-        class="text-inherit font-semibold ml-4 transition-all duration-300"
+        class="text-inherit font-semibold ml-2 transition-all duration-300"
     >
       Ajouter aux favoris
     </span>
-    <span
-        class="absolute right-0 h-full w-10 rounded-lg bg-black-500 flex items-center justify-center transition-all duration-300 group-hover:bg-black-600 group-active:bg-black-700"
-    >
-      <svg
-          class="svg w-8 text-inherit"
-          fill="none"
-          height="24"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          width="24"
-          xmlns="http://www.w3.org/2000/svg"
-      >
-        <line x1="12" x2="12" y1="5" y2="19"></line>
-        <line x1="5" x2="19" y1="12" y2="12"></line>
-      </svg>
-    </span>
+    <UIcon name="i-gridicons-plus" class="text-inherit transition-all duration-300 mx-1" />
   </button>
 </template>
 

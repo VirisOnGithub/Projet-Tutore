@@ -10,11 +10,16 @@
               <span v-else-if="releaseDatePast" class="text-lg">No rating</span>
               <p v-else><i>Ce film sortira prochainement</i></p>
             </Badge>
-            <FavouriteButton :id="movie.id" @add-to-favourite-list="args => $emit('add-to-favourite-list', args)"/>
+            <Badge>{{ movie.release_date.substring(0, 4) }}</Badge>
+
           </div>
         <div id="additionalInformation" class="flex flex-wrap gap-2">
-          <Badge>{{ movie.release_date.substring(0, 4) }}</Badge>
+          <Badge>{{ castDuration(movie.runtime) }}</Badge>
           <Badge>{{ movie.genres.map((genre: Genres) => genre.name).join(", ") }}</Badge>
+        </div>
+        <div id="actions" class="flex mt-3">
+          <FavouriteButton :id="movie.id" @remove-from-watch-later="args => $emit('remove-from-watch-later', args)"/>
+          <DeleteButton :id="movie.id" @remove-from-watch-later="args => $emit('remove-from-watch-later', args)"/>
         </div>
       </div>
     </div>
@@ -22,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import {hasBeenPublished} from "~/composables/movieUtilities";
+import {castDuration, hasBeenPublished} from "~/composables/movieUtilities";
 
 interface Genres {
   id: number;

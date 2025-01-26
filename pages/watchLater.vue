@@ -7,7 +7,7 @@
       </div>
     </div>
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-x-48 mx-auto lg:mx-32 xl:mx-60 2xl:mx-96">
-      <WatchLaterCard v-if="movieInfosWatchLater.length !== 0" v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie" @add-to-favourite-list="(id) => filterWatchList(id)"/>
+      <WatchLaterCard v-if="movieInfosWatchLater.length !== 0" v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie" @remove-from-watch-later="(id) => filterWatchList(id)"/>
       <div v-else class="text-center text-2xl font-bold">Aucun film à regarder plus tard</div>
     </div>
   </div>
