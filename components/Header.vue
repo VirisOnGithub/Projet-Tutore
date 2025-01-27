@@ -16,7 +16,7 @@
           <NuxtLink to="/watchLater" :class="buttonStyle">À regarder plus tard</NuxtLink>
         </li>
         <li v-if="loggedIn">
-          <NuxtLink to="/browse" :class="buttonStyle">Favoris</NuxtLink>
+          <NuxtLink to="/favouriteList" :class="buttonStyle">Favoris</NuxtLink>
         </li>
         <li v-if="loggedIn">
           <NuxtLink to="/draganddrop" :class="buttonStyle">Choisir ses films</NuxtLink>
