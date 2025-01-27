@@ -94,7 +94,7 @@ const items = [
     icon: 'i-material-symbols-av-timer'
   }, {
     label: 'Favoris',
-    to: '/browse',
+    to: '/favouriteList',
     icon: 'i-material-symbols-favorite'
   }, {
     label: 'Choisir ses films',
