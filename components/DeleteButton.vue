@@ -12,9 +12,27 @@ const props = defineProps(
 );
 const emit = defineEmits(['removeFromWatchLater']);
 
-const deletemovieFromWatchLater = async (event : Event) => {
+const deleteMovieFromWatchLater = async (event : Event) => {
   event.stopPropagation();
-  emit('removeFromWatchLater', props.id);
+  try {
+    const response = await fetch('/api/deleteWatchLater', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ movieId: props.id, userId: idUser })
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    console.log('Movie added to favourite list');
+    // router.go(0);
+    emit('removeFromWatchLater', props.id);
+    return null;
+  } catch (error) {
+    console.error('Error removing movie from watchlater list:', error);
+    return null;
+  }
 };
 
 onMounted(async () => {
@@ -25,7 +43,7 @@ onMounted(async () => {
 
 <template>
   <button
-      @click="deletemovieFromWatchLater"
+      @click="deleteMovieFromWatchLater"
       class="rounded-xl ml-2 relative h-6 cursor-pointer flex items-center border border-black-500 bg-black-500 group hover:bg-black-600 active:bg-black-700 text-gray-100 hover:text-[#202020] hover:bg-gray-100"
   >
     <span
