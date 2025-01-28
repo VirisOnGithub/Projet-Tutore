@@ -1,6 +1,9 @@
 <template>
     <div class="p-5 overflow-auto h-screen">
-      <h1 class="text-3xl font-bold mb-10">Liste de favoris</h1>
+      <div class="flex">
+        <UIcon name="i-material-symbols-favorite" class="h-9 w-9 mr-2" />
+        <h1 class="text-3xl font-bold mb-10">Liste de favoris</h1>
+      </div>
       <div v-if="isLoading" class="loading">
         <div class="absolute top-1/2 left-1/2 translate-y-1/2 translate-x-1/2">
           <div class="w-10 h-10 border-4 border-t-white border-gray-600 rounded-full animate-spin"></div>

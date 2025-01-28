@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UModal } from '#components';
+
 const { loggedIn, user, fetch: refreshSession , clear: clearSession, session } = useUserSession()
 const router = useRouter()
 
@@ -6,25 +8,39 @@ useHead({titleTemplate: "Drag and Drop"});
 
 const circleStyle = "height: 20vh; width: 20vh;"
 
-const trendings = await $fetch("/api/getTrendingMovies");
+const page = ref(1);
+
+const modalOpened = ref(false);
+
+const trendings = await $fetch("/api/getTrendingMovies", {
+  method: "POST",
+  body: {
+    page: page.value
+  }
+});
+
+const getNextPage = async () => {
+  page.value++;
+  const newTrendings = await $fetch("/api/getTrendingMovies", {
+    method: "POST",
+    body: {
+      page: page.value
+    }
+  });
+  trendings.results.push(...newTrendings.results);
+}
 
 const i = ref(0);
 
-const movieTime = ref<string>("");
-
-const poster = ref(null);
+const poster = ref<HTMLImageElement | null>(null);
 const genresNames = ref("");
-
-onMounted(() => {
-
-})
 
 watchEffect(() => {
   const mousePosition = ref({ x: 0, y: 0 });
 
   genresNames.value = trendings.results[i.value].genre_ids.map((genreId: number) => {
     return movieGenres.find((genre) => genre.id === genreId)?.name;
-  }).join(", ");
+  }).slice(0,2).join(", ");
 
   onMounted(() => {
     let centerX = window.innerWidth / 2;
@@ -37,7 +53,7 @@ watchEffect(() => {
 
     window.addEventListener('mousemove', (event) => {
       mousePosition.value = { x: event.clientX, y: event.clientY };
-      if (poster.value && poster.value.style) {
+      if (poster.value && poster.value.style && !modalOpened.value) {
         const angle = -Math.atan2(mousePosition.value.x - centerX, mousePosition.value.y - centerY) * 180 / Math.PI + 180;
         if(angle < 45 || angle > 315) {
           poster.value.style.transform = `rotate(${angle}deg)`;
@@ -53,6 +69,14 @@ watchEffect(() => {
   });
 });
 
+watchEffect(() => {
+    if (i.value > trendings.results.length - 3) {
+      getNextPage();
+    }
+});
+
+
+
 const nextMovie = () => {
   i.value = (i.value + 1) % trendings.results.length;
 }
@@ -67,9 +91,6 @@ const addToWatchlist = () => {
   });
   nextMovie();
 }
-
-
-
 </script>
 
 <template>
@@ -86,7 +107,10 @@ const addToWatchlist = () => {
     </div>
   </div>
   <div id="movieInfos" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 text-center bg-gray-200 text-black rounded-xl p-3" style="top: 25%">
-    <h1 class="text-3xl font-bold">{{ trendings.results[i].title }}</h1>
+    <div class="flex justify-center items-center">
+      <h1 class="text-3xl font-bold">{{ trendings.results[i].title }}</h1>
+      <UIcon name="i-streamline-interface-alert-information-circle-information-frame-info-more-help-point-circle" @click="modalOpened = true"  class="translate-x-1"/>
+    </div>
     <div class="flex justify-center">
       <Badge class="text-white mx-2">{{ genresNames }}</Badge>
       <Badge class="mx-2">
@@ -97,10 +121,35 @@ const addToWatchlist = () => {
   <div id="moviePoster" class="absolute left-1/2 -translate-x-1/2 -translate-y-full" style="top: 90%;">
     <img id="poster" ref="poster" :src="'https://image.tmdb.org/t/p/w500' + trendings.results[i].poster_path" alt="movie poster" class="origin-bottom">
   </div>
+
+  <UModal v-model="modalOpened">
+    <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800'}">
+      <template #header>
+        <div class="flex justify-between items-center">
+          <h1 class="text-2xl font-bold">{{ trendings.results[i].title }}</h1>
+          <Badge class="mx-2">
+            <StarBadge :rating="trendings.results[i].vote_average" />
+          </Badge>
+          <UButton @click="modalOpened = false" icon="i-heroicons-x-mark-20-solid" />
+        </div>
+      </template>
+
+      <p>
+        <span class="font-bold">Synopsis : </span>
+        {{ trendings.results[i].overview }}
+      </p>
+    </UCard>
+  </UModal>
 </template>
 
 <style scoped>
 img#poster {
   height: 50vh;
+}
+
+@media screen and (max-width: 1024px) {
+  #movieInfos {
+    width: 80%;
+  }
 }
 </style>

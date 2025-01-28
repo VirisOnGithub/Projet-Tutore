@@ -10,12 +10,12 @@
               <span v-else-if="releaseDatePast" class="text-lg">No rating</span>
               <p v-else><i>Ce film sortira prochainement</i></p>
             </Badge>
-            <Badge>{{ movie.release_date.substring(0, 4) }}</Badge>
+            <Badge class="ml-2">{{ movie.release_date.substring(0, 4) }}</Badge>
 
           </div>
         <div id="additionalInformation" class="flex flex-wrap gap-2">
           <Badge>{{ castDuration(movie.runtime) }}</Badge>
-          <Badge>{{ movie.genres.map((genre: Genres) => genre.name).join(", ") }}</Badge>
+          <Badge>{{ movie.genres.map((genre: Genres) => genre.name).slice(0,2).join(", ") }}</Badge>
         </div>
         <div id="actions" class="flex mt-3">
           <FavouriteButton :id="movie.id" @remove-from-watch-later="args => $emit('remove-from-watch-later', args)"/>

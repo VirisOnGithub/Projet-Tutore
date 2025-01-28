@@ -29,28 +29,14 @@ const carouselConfig = {
 const paths = ref<{ id: number; path: string }[]>([]);
 const isLoading = ref(true);
 
-const fetchPosters = async () => {
-  try {
-    const response = await fetch('/api/getTrendingMovies', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching poster:', error);
-    return null;
-  }
-}
-
 onMounted(async () => {
   console.log('Fetching posters...');
-  const trendings = await fetchPosters();
+  const trendings = await $fetch("/api/getTrendingMovies", {
+    method: "POST",
+    body: {
+      page: 1
+    }
+  });
   paths.value = trendings.results.map((data: any) => ({ path: data.poster_path, id: data.id }));
   isLoading.value = false;
 });

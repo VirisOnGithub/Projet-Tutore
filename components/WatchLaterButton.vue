@@ -96,4 +96,5 @@ const closeModal = () => {
 </template>
 
 <style scoped>
+
 </style>

@@ -6,30 +6,27 @@
         <h1 class="inline-block text-white ml-2 font-bold text-4xl">MovieFinder</h1>
       </NuxtLink>
       <ul class="flex">
-        <li v-if="loggedIn">
-          <NuxtLink to="/profile" :class="buttonStyle">Profil</NuxtLink>
-        </li>
-        <li v-else>
+<!--        <li v-if="loggedIn">-->
+<!--          <NuxtLink to="/profile" :class="buttonStyle">Profil</NuxtLink>-->
+<!--        </li>-->
+        <li v-if="!loggedIn">
           <NuxtLink to="/login" :class="buttonStyle">Connexion</NuxtLink>
         </li>
-        <li v-if="loggedIn">
-          <NuxtLink to="/watchLater" :class="buttonStyle">À regarder plus tard</NuxtLink>
-        </li>
-        <li v-if="loggedIn">
-          <NuxtLink to="/favouriteList" :class="buttonStyle">Favoris</NuxtLink>
-        </li>
-        <li v-if="loggedIn">
-          <NuxtLink to="/draganddrop" :class="buttonStyle">Choisir ses films</NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/about" :class="buttonStyle">Plus</NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/movie/762509" :class="buttonStyle">Le Roi Lion</NuxtLink>
-        </li>
+<!--        <li v-if="loggedIn">-->
+<!--          <NuxtLink to="/watchLater" :class="buttonStyle">À regarder plus tard</NuxtLink>-->
+<!--        </li>-->
+<!--        <li v-if="loggedIn">-->
+<!--          <NuxtLink to="/favouriteList" :class="buttonStyle">Favoris</NuxtLink>-->
+<!--        </li>-->
+<!--        <li v-if="loggedIn">-->
+<!--          <NuxtLink to="/draganddrop" :class="buttonStyle">Choisir ses films</NuxtLink>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <NuxtLink to="/about" :class="buttonStyle">Plus</NuxtLink>-->
+<!--        </li>-->
         <li v-if="loggedIn">
           <UDropdown class="cursor-pointer" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }">
-            <UAvatar :src="'https://ui-avatars.com/api//?name=' + username + '&background=C4B5FD&color=1D1D1D&&rounded=true&size=45'" />
+            <UAvatar :src="'https://ui-avatars.com/api//?name=' + username + '&background=C4B5FD&color=1D1D1D&&rounded=true&size=64'" size="xl" />
 
             <template #logout="{ item }">
               <NuxtLink>
