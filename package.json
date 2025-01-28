@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "cd docker && docker-compose up -d && cd .. && nuxt build",
     "dev": "cd docker && docker-compose up -d && cd .. && nuxt dev",
     "stop": "cd docker && docker-compose down && cd ..",
     "generate": "nuxt generate",

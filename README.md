@@ -1,75 +1,58 @@
-# Nuxt Minimal Starter
+# MovieFinder
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Sommaire
 
-## Setup
 
-Make sure to install dependencies:
+## Introduction
+
+Le but de _MovieFinder_ est de permettre à l'utilisateur de pouvoir avoir des nouvelles idées de films à regarder.
+
+L'application propose ainsi de nouveaux films tendances à l'utilisateur chaque jour.
+
+## Utilisation
+
+Pour pouvoir utiliser l'application, il faut se rendre à la racine du projet et lancer :
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+npm i
 ```
 
-## Development Server
+qui installe l'entièreté des dépendances nécessaires au bon fonctionnement de l'application.
 
-Start the development server on `http://localhost:3000`:
+### Pour le développement
+
+Pour lancer l'application en mode développement, il suffit de lancer :
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Cette commande lance le serveur de développement par défaut sur le port 3000.
+(Il faut laisser le temps pour que le serveur se lance. Ainsi, si vous voyez une page avec le logo Nuxt, c'est que le serveur démarre. Selon la puissance de votre ordinateur, cette opération peut prendre de quelques secondes à quelques dizaines de secondes.)
 
-Build the application for production:
+### Pour la préproduction
+
+Pour lancer l'application en mode préproduction, il suffit de lancer :
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+npm run preview
 ```
 
-Locally preview production build:
+Ces commandes lancent l'application aussi sur le port 3000
+
+### Pour la production
+
+Pour lancer l'application en mode production, il suffit de lancer :
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+npm run build
+node .output/server/main.mjs
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Base de données
+
+Pour plus de praticité, la base de données est dockerisée. Elle est lancée automatiquement dès que les commandes `dev` ou `build` sont lancées.
+
+> [!WARNING]  
+> Après avoir fini votre utilisation de l'application, il est recommandé de stopper la base de données en utilisant la commande `npm run stop`.
