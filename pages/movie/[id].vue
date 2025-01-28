@@ -57,10 +57,19 @@
             <p class="mt-2 break-words">{{ comment.content }}</p>
           </div>
         </div>
-        <div v-if="loggedIn" class="flex items-center justify-center mt-10">
-          <textarea v-model="commentaire" class="border border-gray-300 p-2 rounded m-1" placeholder="Votre commentaire"/>
-          <RatingSlider :rating="newRating" @update:rating="updateRating"/>
-          <button @click="addComment" class="bg-transparent border-2 border-green-500 font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
+        <div class="flex flex-col items-center">
+          <h3 class="text-2xl font-bold">Laisser un avis</h3>
+          <div v-if="loggedIn" class="flex flex-col items-center justify-center mt-10">
+            <nuxt-rating
+                :rating-step="0.5"
+                :read-only="false"
+                @rating-selected="(rating) => updateRating(rating*2)"
+                :rating-size="30"
+            />
+            <textarea v-model="commentaire" class="border border-gray-300 p-2 rounded m-1" placeholder="Votre commentaire"/>
+            <!--          <RatingSlider :rating="newRating" @update:rating="updateRating"/>-->
+            <button @click="addComment" class="bg-transparent border-2 border-green-500 font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
+          </div>
         </div>
       </div>
     </div>
