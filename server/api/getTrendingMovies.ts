@@ -1,12 +1,10 @@
 // https://developer.themoviedb.org/reference/movie-images
-import { promises as fs } from "fs";
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const page = body.page || 1;
 
-    const secretsPath = "secrets.txt";
-    const secrets = await fs.readFile(secretsPath, "utf-8");
+    const secrets = process.env.TMDB_API_KEY;
     try {
         const url =
             "https://api.themoviedb.org/3/trending/movie/day?language=fr&page=" + page;
