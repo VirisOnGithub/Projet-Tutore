@@ -3,7 +3,7 @@
       <div class="flex items-start">
         <img :src="'https://image.tmdb.org/t/p/w1280' + movie.poster_path" alt="Poster" class="h-60 mr-4 relative -top-28 border border-white rounded-lg">
         <div>
-          <h3 class="text-3xl font-bold">{{ movie.title}}</h3>
+          <h3 class="text-3xl font-bold">{{ truncateTitle(movie.title) }}</h3>
           <div id="stars" class="flex mb-3 z-[2]">
               <Badge>
                 <StarBadge v-if="movie.vote_average > 0 && releaseDatePast" :rating="movie.vote_average"/>
@@ -51,6 +51,10 @@
   const goToMoviePage = () => {
     router.push(`/movie/${props.movie.id}`);
   };
+
+  const truncateTitle = (title: string): string => {
+  return title.length > 20 ? title.substring(0, 20) + '...' : title;
+};
   
   onMounted(async () => {
     releaseDatePast.value = hasBeenPublished(props.movie.release_date)

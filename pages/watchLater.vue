@@ -16,6 +16,7 @@
       <div v-else class="text-center text-2xl font-bold">Aucun film à regarder plus tard</div>
       <div class="h-8"></div>
     </div>
+    <div class="mt-12"></div>
   </div>
 </template>
 

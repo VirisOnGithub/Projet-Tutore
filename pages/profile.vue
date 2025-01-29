@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-screen">
+  <div class="flex flex-col w-screen overflow-auto h-screen">
     <div class="grid grid-cols-2 gap-2 p-5 justify-center">
       <div class="flex items-center ml-5">
         <UserIcon/>
@@ -27,7 +27,7 @@
           <div class="w-10 h-10 border-4 border-t-white border-gray-600 rounded-full animate-spin"></div>
         </div>
       </div>
-      <div v-else class="grid grid-rows-3 gap-2 p-5">
+      <div v-else class="grid grid-rows-2 gap-2 p-5">
         <div class="flex flex-col w-full ml-5">
           <NuxtLink to="/watchLater" class="font-semibold text-2xl">Films à regarder plus tard :</NuxtLink>
           <div class="flex flex-row gap-5">
@@ -54,11 +54,9 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-row w-full">
-          <h1 class="font-semibold text-2xl">Placeholder</h1>
-        </div>
       </div>
     </div>
+    <div class="mt-20"></div>
   </div>
 </template>
 

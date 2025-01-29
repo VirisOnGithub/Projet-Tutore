@@ -3,7 +3,7 @@
     <div class="bg-gray-400 p-5 rounded-lg shadow-lg text-black">
       <h2 class="text-xl font-bold mb-4">{{ title }}</h2>
       <p>{{ message }}</p>
-      <button @click="closeModal" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">OK</button>
+      <button @click="closeModal" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">OK</button>
     </div>
   </div>
 </template>

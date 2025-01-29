@@ -13,6 +13,7 @@
         <FavouriteCard v-if="movieInfosWatchLater.length !== 0" v-for="movie in movieInfosWatchLater" :key="movie.id" :movie="movie" @remove-from-watch-later="(id) => filterWatchList(id)"/>
         <div v-else class="text-center text-2xl font-bold">Aucun film dans les favoris</div>
       </div>
+      <div class="mt-12"></div>
     </div>
   </template>
   
