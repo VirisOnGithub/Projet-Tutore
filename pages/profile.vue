@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-screen overflow-auto h-screen">
+  <div class="flex flex-col w-screen h-screen overflow-scroll">
     <div class="grid grid-cols-2 gap-2 p-5 justify-center">
       <div class="flex items-center ml-5">
         <UserIcon/>
@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-zinc-800 h-full p-5">
+    <div class="bg-zinc-800 p-5">
       <p class="font-bold text-3xl">Activités récentes :</p>
       <div v-if="isLoading" class="h-screen relative">
         <div class="absolute top-1/2 left-1/2 translate-y-1/2 translate-x-1/2">
@@ -30,14 +30,19 @@
       <div v-else class="grid grid-rows-2 gap-2 p-5">
         <div class="flex flex-col w-full ml-5">
           <NuxtLink to="/watchLater" class="font-semibold text-2xl">Films à regarder plus tard :</NuxtLink>
-          <div class="flex flex-row gap-5">
+          <div>
             <h1 v-if="recentInfosWatchLater.length == 0" class="text-xl">Pas de films à regarder plus tard</h1>
-            <SmallMovieCard v-else v-for="movie in recentInfosWatchLater"
-                            :key="movie.id" :movie="movie"/>
-            <div class="flex items-center hover:scale-110 transition-transform transform">
-              <NuxtLink to="watchLater">
-                <img src="/white_chevron.png" alt="Flèche blanche">
-              </NuxtLink>
+            <div v-else class="flex flex-row gap-5">
+              <SmallMovieCard :key="recentInfosWatchLater[0].id" :movie="recentInfosWatchLater[0]"/>
+              <SmallMovieCard :key="recentInfosWatchLater[1].id" :movie="recentInfosWatchLater[1]" class="hidden md:flex"/>
+              <SmallMovieCard :key="recentInfosWatchLater[2].id" :movie="recentInfosWatchLater[2]" class="hidden lg:flex"/>
+              <SmallMovieCard :key="recentInfosWatchLater[3].id" :movie="recentInfosWatchLater[3]" class="hidden xl:flex"/>
+              <SmallMovieCard :key="recentInfosWatchLater[4].id" :movie="recentInfosWatchLater[4]" class="hidden 2xl:flex"/>
+              <div class="flex items-center hover:scale-110 transition-transform transform">
+                <NuxtLink to="/watchLater">
+                  <img src="/white_chevron.png" alt="Flèche blanche">
+                </NuxtLink>
+              </div>
             </div>
           </div>
         </div>
@@ -45,18 +50,23 @@
           <NuxtLink to="/favouriteList" class="font-semibold text-2xl">Films favoris :</NuxtLink>
           <div class="flex flex-row gap-5">
             <h1 v-if="recentInfosFavorites.length == 0" class="text-xl">Pas de films favoris</h1>
-            <SmallMovieCard v-else v-for="movie in recentInfosFavorites"
-                            :key="movie.id" :movie="movie"/>
-            <div class="flex items-center hover:scale-110 transition-transform transform">
-              <NuxtLink to="favouriteList">
-                <img src="/white_chevron.png" alt="Flèche blanche">
-              </NuxtLink>
+            <div v-else class="flex flex-row gap-5">
+              <SmallMovieCard :key="recentInfosFavorites[0].id" :movie="recentInfosFavorites[0]"/>
+              <SmallMovieCard :key="recentInfosFavorites[1].id" :movie="recentInfosFavorites[1]" class="hidden md:flex"/>
+              <SmallMovieCard :key="recentInfosFavorites[2].id" :movie="recentInfosFavorites[2]" class="hidden lg:flex"/>
+              <SmallMovieCard :key="recentInfosFavorites[3].id" :movie="recentInfosFavorites[3]" class="hidden xl:flex"/>
+              <SmallMovieCard :key="recentInfosFavorites[4].id" :movie="recentInfosFavorites[4]" class="hidden 2xl:flex"/>
+              <div class="flex items-center hover:scale-110 transition-transform transform">
+                <NuxtLink to="/favouriteList">
+                  <img src="/white_chevron.png" alt="Flèche blanche">
+                </NuxtLink>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="h-20"></div>
     </div>
-    <div class="mt-20"></div>
   </div>
 </template>
 

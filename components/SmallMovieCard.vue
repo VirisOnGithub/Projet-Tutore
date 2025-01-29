@@ -10,7 +10,7 @@ const props = defineProps<{
 const router = useRouter();
 
 const truncateTitle = (title: string): string => {
-  return title.length > 15 ? title.substring(0, 15) + '...' : title;
+  return title.length > 13 ? title.substring(0, 13) + '...' : title;
 };
 
 const goToMoviePage = () => {
