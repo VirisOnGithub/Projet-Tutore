@@ -16,7 +16,7 @@ const passwordError = ref('');
  * Connecte l'utilisateur
  */
 async function login() {
-  $fetch('/api/luka', {
+  $fetch('/api/login', {
     method: 'POST',
     body: {
       username: username.value,
