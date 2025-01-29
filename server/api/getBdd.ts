@@ -7,8 +7,6 @@ export async function connectToDatabase() {
         password: 'root',
         database: 'projetTutore'
     });
-
-    console.log('Connected to the database');
     return connection;
 }
 

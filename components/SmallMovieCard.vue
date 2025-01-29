@@ -1,3 +1,7 @@
+<!-- 
+    Composant pour représenter le film dans le profil de l'utilisateur
+-->
+
 <script setup lang="ts">
 const props = defineProps<{
   movie: {
@@ -9,10 +13,18 @@ const props = defineProps<{
 
 const router = useRouter();
 
+/**
+ * Tronque le titre du film si celui-ci est trop long
+ * @param title Titre du film
+ * @returns Titre tronqué
+ */
 const truncateTitle = (title: string): string => {
   return title.length > 13 ? title.substring(0, 13) + '...' : title;
 };
 
+/**
+ * Redirige l'utilisateur vers la page du film
+ */
 const goToMoviePage = () => {
   router.push(`/movie/${props.movie.id}`);
 };

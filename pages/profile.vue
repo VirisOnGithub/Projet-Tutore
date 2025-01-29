@@ -1,3 +1,7 @@
+<!-- 
+    Page de profil de l'utilisateur
+-->
+
 <template>
   <div class="flex flex-col w-screen h-screen overflow-scroll">
     <div class="grid grid-cols-2 gap-2 p-5 justify-center">
@@ -76,6 +80,9 @@ import {useRouter} from "vue-router";
 const router = useRouter();
 const {loggedIn} = useUserSession();
 
+/**
+ * Vérifie si l'utilisateur est connecté
+ */
 const checkConnected = (): void => {
   if (!loggedIn.value) {
     router.push('/login')
@@ -98,6 +105,9 @@ const recentInfosFavorites = ref<Movie[]>([]);
 
 checkConnected();
 
+/**
+ * Récupère les films à regarder plus tard
+ */
 const fetchRecentWatchLater = async () => {
   try {
     const response = await fetch('/api/getRecentWatchlaterMovies', {
@@ -117,12 +127,17 @@ const fetchRecentWatchLater = async () => {
   }
 };
 
+/**
+ * Déconnecte l'utilisateur
+ */
 const logOut = async () => {
-  console.log('logging out');
   await clearSession();
   router.push('/');
 }
 
+/**
+ * Récupère les films favoris récents
+ */
 const fetchRecentFavorites = async () => {
   try {
     const response = await fetch('/api/getRecentFavoriteMovies', {
@@ -138,10 +153,14 @@ const fetchRecentFavorites = async () => {
     return await response.json();
   } catch (error) {
     console.error('Error fetching watch later movies:', error);
-    return [];
+    return null;
   }
 };
 
+/**
+ * Récupère les informations du film
+ * @param {number} id_film - L'identifiant du film
+ */
 const fetchMovieInfos = async (id_film: number) => {
   try {
     const response = await fetch('/api/getMovieInfos', {
@@ -161,6 +180,9 @@ const fetchMovieInfos = async (id_film: number) => {
   }
 };
 
+/**
+ * Supprime le compte utilisateur
+ */
 const deleteAccount = async () => {
   try {
     const response = await fetch('/api/deleteAccount', {
@@ -173,7 +195,6 @@ const deleteAccount = async () => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    console.log('Account deleted');
     clearSession();
   } catch (error) {
     console.error('Error deleting account:', error);
@@ -201,6 +222,3 @@ onMounted(async () => {
 const buttonStyle: string = "flex h-full w-full justify-center items-center text-center font-semibold bg-violet-600 hover:bg-violet-500 hover:text-white hover:border-transparent active:bg-violet-700 rounded transition-all";
 
 </script>
-
-<style scoped>
-</style>

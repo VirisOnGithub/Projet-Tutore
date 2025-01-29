@@ -1,3 +1,7 @@
+<!-- 
+    Badge pour représenter la note d'un film
+-->
+
 <script setup lang="ts">
 defineProps({
   rating: {
@@ -7,14 +11,26 @@ defineProps({
 })
 
 
+/**
+ * Récupère le nombre d'étoiles pleines à afficher.
+ * @param rating évaluation sur 10
+ */
 const getNumberofFullStars = (rating: number): number => {
   return Math.floor(rating / 2);
 }
 
+/**
+ * Récupère le nombre d'étoiles à moitié à afficher.
+ * @param rating évaluation sur 10
+ */
 const getNumberOfHalfStars = (rating: number): number => {
   return (rating / 2 % 1) >= 0.5 ? 1 : 0;
 }
 
+/**
+ * Récupère le nombre d'étoiles vides à afficher.
+ * @param rating évaluation sur 10
+ */
 const getNumberOfEmptyStars = (rating: number) => {
   return 5 - getNumberofFullStars(rating) - getNumberOfHalfStars(rating);
 }
@@ -30,7 +46,3 @@ const getNumberOfEmptyStars = (rating: number) => {
     {{ rating.toFixed(1) }}
   </div>
 </template>
-
-<style scoped>
-
-</style>

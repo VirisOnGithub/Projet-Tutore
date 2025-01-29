@@ -1,3 +1,7 @@
+<!-- 
+    Bouton pour ajouter un film à la liste des films en favoris
+-->
+
 <script setup lang="ts">
 const { session } = useUserSession();
 const idUser = session.value.user?.id;
@@ -25,7 +29,6 @@ const addToFavouriteList = async (event : Event) => {
         if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
         }
-        console.log('Movie added to favourite list');
         // router.go(0);
         emit('removeFromWatchLater', props.id);
         return null;
@@ -34,11 +37,6 @@ const addToFavouriteList = async (event : Event) => {
         return null;
     }
 };
-
-onMounted(async () => {
-  console.log('id', idUser);
-  console.log('route.params.id', props.id);
-});
 </script>
 
 <template>

@@ -1,3 +1,7 @@
+<!-- 
+    Page de la liste des films à regarder plus tard
+-->
+
 <template>
   <div class="p-5 overflow-auto h-screen">
     <div class="flex">
@@ -43,6 +47,9 @@ const isLoading = ref(true);
 const movieInfosWatchLater = ref<Movie[]>([]);
 const { user } = useUserSession();
 
+/**
+ * Récupère les films à regarder plus tard
+ */
 const fetchWatchLaterMovies = async () => {
   try {
     const response = await fetch('/api/getWatchlaterMovies', {
@@ -62,6 +69,11 @@ const fetchWatchLaterMovies = async () => {
   }
 };
 
+/**
+ * Récupère les informations d'un film
+ *
+ * @param {number} id_film - L'identifiant du film
+ */
 const fetchMovieInfos = async (id_film: number) => {
   try {
     const response = await fetch('/api/getMovieInfos', {
@@ -81,8 +93,12 @@ const fetchMovieInfos = async (id_film: number) => {
   }
 };
 
+/**
+ * Filtre la liste des films à regarder plus tard
+ *
+ * @param {number} id - L'identifiant du film
+ */
 const filterWatchList = (id: number) => {
-  console.log('oui');
   movieInfosWatchLater.value = movieInfosWatchLater.value.filter((movie) => movie.id !== id);
 };
 

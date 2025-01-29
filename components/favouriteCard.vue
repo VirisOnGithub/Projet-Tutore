@@ -1,3 +1,6 @@
+<!-- 
+    Composant d'affichage des films dans la liste des favoris
+-->
 <template>
     <div @click="goToMoviePage" class="bg-[#202020] border border-white p-5 rounded-lg cursor-pointer transition-transform transform hover:scale-105 h-44 my-16" style="width: 600px">
       <div class="flex items-start">
@@ -18,7 +21,7 @@
             <Badge>{{ movie.genres.map((genre: Genres) => genre.name).slice(0,2).join(", ") }}</Badge>
           </div>
           <div id="actions" class="flex mt-3">
-            <DeleteButtonFavourite :id="movie.id" @remove-from-watch-later="args => $emit('remove-from-watch-later', args)"/>
+            <DeleteButtonFavourite :id="movie.id" @remove-from-favourites="(args: number) => $emit('remove-from-favourites', args)"/>
           </div>
         </div>
       </div>
@@ -26,7 +29,7 @@
   </template>
   
   <script lang="ts" setup>
-  import {castDuration, hasBeenPublished} from "~/composables/movieUtilities";
+import {castDuration, hasBeenPublished} from "~/composables/movieUtilities";
   
   interface Genres {
     id: number;

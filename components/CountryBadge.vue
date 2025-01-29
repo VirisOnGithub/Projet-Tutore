@@ -1,3 +1,7 @@
+<!-- 
+    Bage pour représenter les pays de provenance d'un film
+-->
+
 <template>
   <div class="flex items-center">
     <img :src="getCountryFlag(country)" :alt="'flag of ' + country" class="w-8 h-8 mr-2"/>
@@ -13,10 +17,23 @@ defineProps({
   }
 });
 
+/**
+ * Récupère l'URL du drapeau d'un pays donné.
+ *
+ * @param {string} country - Le code du pays (ISO 3166-1 alpha-2).
+ * @returns {string} L'URL de l'image du drapeau du pays.
+ */
 const getCountryFlag = (country: string) => {
   return `https://flagsapi.com/${country}/flat/64.png`;
 };
 
+/**
+ * Récupère le nom du pays à partir de son code ISO.
+ *
+ * @param {string} country - Le code ISO du pays.
+ * @returns {string} Le nom du pays correspondant.
+ * @throws {Error} Si le code ISO du pays n'est pas trouvé dans la carte ISO.
+ */
 const getCountryName = (country: string): string => {
   if (isoMap[country]) {
     return isoMap[country];
@@ -25,6 +42,9 @@ const getCountryName = (country: string): string => {
   }
 };
 
+/**
+ * Carte des codes ISO des pays vers leur nom.
+ */
 const isoMap: { [key: string]: string } = {
   "AD": "Andorre",
   "AE": "Émirats Arabes Unis",

@@ -30,6 +30,5 @@ export default defineEventHandler(async (event) => {
     }
 
     await deleteWatchLater(movieId, userId);
-    console.log('added to favourite');
 
 });

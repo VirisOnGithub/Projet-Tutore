@@ -12,6 +12,11 @@ const props = defineProps(
 );
 const emit = defineEmits(['removeFromWatchLater']);
 
+/**
+ * Supprime un film de la liste des films à voir plus tard.
+ *
+ * @param {Event} event - L'événement de clic.
+ */
 const deleteMovieFromWatchLater = async (event : Event) => {
   event.stopPropagation();
   try {
@@ -25,7 +30,6 @@ const deleteMovieFromWatchLater = async (event : Event) => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    console.log('Movie added to favourite list');
     // router.go(0);
     emit('removeFromWatchLater', props.id);
     return null;
@@ -34,11 +38,6 @@ const deleteMovieFromWatchLater = async (event : Event) => {
     return null;
   }
 };
-
-onMounted(async () => {
-  console.log('id', idUser);
-  console.log('route.params.id', props.id);
-});
 </script>
 
 <template>

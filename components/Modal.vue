@@ -1,3 +1,7 @@
+<!-- 
+    Composant classique de modal
+-->
+
 <template>
   <div v-if="isVisible" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-gray-400 p-5 rounded-lg shadow-lg text-black">

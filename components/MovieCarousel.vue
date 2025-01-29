@@ -1,3 +1,7 @@
+<!-- 
+    Carrousel d'accueil de films récents
+-->
+
 <template>
   <div v-if="isLoading" class="flex justify-center items-center h-72 text-2xl">Loading...</div>
   <UCarousel v-else :items="paths" :config="carouselConfig" arrows>
@@ -18,6 +22,7 @@ interface Movie {
   path: string;
 }
 
+// Configuration du carousel
 const carouselConfig = {
   itemsToShow: 2,
   wrapAround: true,
@@ -30,7 +35,6 @@ const paths = ref<{ id: number; path: string }[]>([]);
 const isLoading = ref(true);
 
 onMounted(async () => {
-  console.log('Fetching posters...');
   const trendings = await $fetch("/api/getTrendingMovies", {
     method: "POST",
     body: {

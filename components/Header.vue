@@ -6,24 +6,9 @@
         <h1 class="inline-block text-white ml-2 font-bold text-4xl">MovieFinder</h1>
       </NuxtLink>
       <ul class="flex">
-        <!--        <li v-if="loggedIn">-->
-        <!--          <NuxtLink to="/profile" :class="buttonStyle">Profil</NuxtLink>-->
-        <!--        </li>-->
         <li v-if="!loggedIn">
           <NuxtLink to="/login" :class="buttonStyle">Connexion</NuxtLink>
         </li>
-        <!--        <li v-if="loggedIn">-->
-        <!--          <NuxtLink to="/watchLater" :class="buttonStyle">À regarder plus tard</NuxtLink>-->
-        <!--        </li>-->
-        <!--        <li v-if="loggedIn">-->
-        <!--          <NuxtLink to="/favouriteList" :class="buttonStyle">Favoris</NuxtLink>-->
-        <!--        </li>-->
-        <!--        <li v-if="loggedIn">-->
-        <!--          <NuxtLink to="/draganddrop" :class="buttonStyle">Choisir ses films</NuxtLink>-->
-        <!--        </li>-->
-        <!--        <li>-->
-        <!--          <NuxtLink to="/about" :class="buttonStyle">Plus</NuxtLink>-->
-        <!--        </li>-->
         <li v-if="loggedIn">
           <UDropdown class="cursor-pointer" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }">
             <UAvatar
@@ -42,15 +27,10 @@
                 <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 mr-1" />
                 <span class="truncate">{{ item.label }}</span>
               </NuxtLink>
-
-              <!--              <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />-->
             </template>
 
           </UDropdown>
         </li>
-        <!--        <li v-if="loggedIn">-->
-        <!--          <NuxtLink @click="logOut" :class="buttonStyle" class="cursor-pointer">Déconnexion</NuxtLink>-->
-        <!--        </li>-->
       </ul>
     </nav>
   </header>
@@ -63,26 +43,22 @@ const { loggedIn, clear: clearSession, session, fetch, user } = useUserSession()
 const router = useRouter();
 const username = ref(user.value?.username);
 
-console.log('loggedIn', loggedIn.value);
-
 watch(() => router.currentRoute.value, async () => {
   if (loggedIn.value) {
     await fetch();
     username.value = user.value?.username || '';
-    console.log('username', username.value);
   }
 });
 
+/**
+ * Deconnecte l'utilisateur et le redirige vers la page d'accueil.
+ */
 const logOut = async () => {
-  console.log('logging out');
   await clearSession();
   await router.push('/');
 }
 
-const capitalize = <T extends string>(str: T) => {
-  return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-}
-
+// items pour le dropdown de l'utilisateur
 const items = [
   [{
     label: 'Profil',

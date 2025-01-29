@@ -1,3 +1,7 @@
+<!-- 
+    Page d'accueil pour le Carousel de films tendances
+-->
+
 <template>
   <div class="flex absolute top-0 left-0 h-screen w-screen justify-center items-center bg-[#202020]">
     <div class="block">

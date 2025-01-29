@@ -1,3 +1,7 @@
+<!-- 
+    Page de création de compte utilisateur
+-->
+
 <script setup lang="ts">
 const router = useRouter()
 
@@ -26,8 +30,9 @@ const fetchUser = async () => {
   }
 };
 
-
-
+/**
+ * Crée un compte utilisateur
+ */
 async function createAccount() {
   const response = await fetchUser();
   for (const user of response) {

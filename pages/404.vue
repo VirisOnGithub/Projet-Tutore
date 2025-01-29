@@ -1,3 +1,7 @@
+<!-- 
+    Page 404
+-->
+
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 
@@ -9,13 +13,16 @@ useHead({titleTemplate: "Page introuvable"});
 
 const router = useRouter();
 
+/**
+ * Retourne à la page d'accueil
+ */
 const goHome = () => {
   router.push('/');
 };
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center h-screen ">
+  <div class="flex flex-col items-center justify-center h-screen">
     <h1 class="text-3xl font-bold text-gray-800 mb-4">404</h1>
     <p class="text-xl text-gray-600 mb-5">Oups ! Il semblerait qu'un problème soit arrivé.</p>
     <button @click="goHome" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">

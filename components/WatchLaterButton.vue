@@ -1,15 +1,22 @@
+<!-- 
+    Bouton pour ajouter un film à la liste "À regarder plus tard"
+-->
+
 <script setup lang="ts">
 const route = useRoute();
 const id = useUserSession().session.value.user?.id;
-const movieInWL = ref(false);
-const showModal = ref(false);
-const modalTitle = ref('');
-const modalMessage = ref('');
+const movieInWL = ref<boolean | null>(false);
+const showModal = ref<boolean>(false);
+const modalTitle = ref<string>('');
+const modalMessage = ref<string>('');
 
 onMounted(async () => {
   movieInWL.value = await isMovieInWatchLater();
 });
 
+/**
+ * Ajoute le film à la liste "À regarder plus tard"
+ */
 const addToWatchLater = async () => {
   try {
     const response = await fetch('/api/addToWatchLater', {
@@ -22,14 +29,12 @@ const addToWatchLater = async () => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    console.log('Movie added to watchlater list');
     movieInWL.value = true;
     modalTitle.value = 'Succès';
     modalMessage.value = 'Film ajouté à la liste "À regarder plus tard"';
     showModal.value = true;
     return null;
   } catch (error) {
-    console.error('Error adding movie to watchlater list:', error);
     modalTitle.value = 'Erreur';
     modalMessage.value = 'Erreur lors de l\'ajout du film à la liste';
     showModal.value = true;
@@ -37,7 +42,11 @@ const addToWatchLater = async () => {
   }
 };
 
-const isMovieInWatchLater = async () => {
+/**
+ * Vérifie si le film est dans la liste "À regarder plus tard"
+ * @returns {Promise<boolean | null>} - Vrai si le film est dans la liste, faux sinon
+ */
+const isMovieInWatchLater = async (): Promise<boolean | null> => {
   try {
     const response = await fetch('/api/isMovieInWatchLater', {
       method: 'POST',
@@ -49,7 +58,7 @@ const isMovieInWatchLater = async () => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const data = await response.json();
+    const data : Promise<boolean> = await response.json();
     return data;
   } catch (error) {
     console.error('Error checking if movie is in watchlater list:', error);
@@ -57,6 +66,9 @@ const isMovieInWatchLater = async () => {
   }
 };
 
+/**
+ * Close the modal
+ */
 const closeModal = () => {
   showModal.value = false;
 };
@@ -94,7 +106,3 @@ const closeModal = () => {
   </div>
   <Modal :title="modalTitle" :message="modalMessage" :isVisible="showModal" @close="closeModal" />
 </template>
-
-<style scoped>
-
-</style>

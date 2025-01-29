@@ -1,8 +1,10 @@
-<script setup lang="ts">
-import { UModal } from '#components';
+<!-- 
+    Page de choix dynamique de films tendances
+-->
 
-const { loggedIn, user, fetch: refreshSession , clear: clearSession, session } = useUserSession()
-const router = useRouter()
+<script setup lang="ts">
+
+const { session } = useUserSession()
 
 useHead({titleTemplate: "Drag and Drop"});
 
@@ -19,6 +21,9 @@ const trendings = await $fetch("/api/getTrendingMovies", {
   }
 });
 
+/**
+ * Récupère la page suivante de films tendances
+ */
 const getNextPage = async () => {
   page.value++;
   const newTrendings = await $fetch("/api/getTrendingMovies", {
@@ -38,11 +43,14 @@ const genresNames = ref("");
 watchEffect(() => {
   const mousePosition = ref({ x: 0, y: 0 });
 
+  // On récupère les deux premiers genres du film pour éviter d'en avoir trop (lisibilité)
   genresNames.value = trendings.results[i.value].genre_ids.map((genreId: number) => {
     return movieGenres.find((genre) => genre.id === genreId)?.name;
   }).slice(0,2).join(", ");
 
   onMounted(() => {
+
+    // On centre le point de rotation du poster
     let centerX = window.innerWidth / 2;
     let centerY = window.innerHeight * 0.9;
 
@@ -51,9 +59,11 @@ watchEffect(() => {
       centerY = window.innerHeight * 0.9;
     });
 
+    // On récupère la position de la souris pour faire tourner le poster
     window.addEventListener('mousemove', (event) => {
       mousePosition.value = { x: event.clientX, y: event.clientY };
       if (poster.value && poster.value.style && !modalOpened.value) {
+        // calcul de l'angle de rotation nécessaire (tangeante limitée à l'angle [-45°, 45°])
         const angle = -Math.atan2(mousePosition.value.x - centerX, mousePosition.value.y - centerY) * 180 / Math.PI + 180;
         if(angle < 45 || angle > 315) {
           poster.value.style.transform = `rotate(${angle}deg)`;
@@ -75,12 +85,16 @@ watchEffect(() => {
     }
 });
 
-
-
+/**
+ * Passe au film suivant
+ */
 const nextMovie = () => {
   i.value = (i.value + 1) % trendings.results.length;
 }
 
+/**
+ * Ajoute le film à la liste de films à regarder plus tard
+ */
 const addToWatchlist = () => {
   $fetch("/api/addToWatchLater", {
     method: "POST",

@@ -1,3 +1,7 @@
+<!-- 
+    Page qui affiche les détails d'un film
+-->
+
 <template>
   <div>
     <div v-if="isLoading" class="loading">
@@ -136,6 +140,9 @@ interface Movie {
   vote_count: number
 }
 
+/**
+ * Récupère les informations du film
+ */
 const fetchMovieInfos = async () => {
   try {
     const response = await fetch('/api/getMovieInfos', {
@@ -155,6 +162,9 @@ const fetchMovieInfos = async () => {
   }
 }
 
+/**
+ * Récupère les commentaires du film
+ */
 const fetchComments = async () => {
   try {
     const response = await fetch('/api/getComments', {
@@ -168,19 +178,27 @@ const fetchComments = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const comments = await response.json();
-    console.log('Comments fetched:', comments);
     return comments;
   } catch (error) {
     console.error('Error fetching comments:', error);
     return null;
   }
 };
+
+/**
+ * Convertit la durée du film en heures et minutes
+ * @param {number} duration - La durée du film en minutes
+ * @returns {string} - La durée du film en heures et minutes
+ */
 const castDuration = (duration: number): string => {
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
   return `${hours}h${minutes}m`;
 }
 
+/**
+ * Ajoute un commentaire
+ */
 const addComment = async () => {
   try {
     const response = await fetch('/api/addComment', {
@@ -199,9 +217,7 @@ const addComment = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const comment = await response.json();
-    console.log('Comment inserted:', comment);
     comments.value = await fetchComments();
-    console.log(comments.value)
     commentaire.value = "";
     return null;
   } catch (error) {
@@ -210,16 +226,28 @@ const addComment = async () => {
   }
 };
 
+/**
+ * Met à jour la note du film
+ * @param {number} rating - La note du film
+ */
 const updateRating = (rating: number) => {
   newRating.value = rating;
 };
 
-const hasBeenPublished = (release_date : string) => {
+/**
+ * Vérifie si le film a déjà été publié
+ * @param {string} release_date - La date de sortie du film
+ * @returns {boolean} - Vrai si le film a déjà été publié, faux sinon
+ */
+const hasBeenPublished = (release_date : string): boolean => {
   const currDate = new Date();
   const release_dateFilm = new Date(release_date)
   return release_dateFilm <= currDate;
 }
 
+/**
+ * Vérifie si le film est dans la liste des films en favoris
+ */
 const isInFavourites = async () => {
   try {
     const response = await fetch('/api/getFavoritesMovies', {
@@ -235,13 +263,11 @@ const isInFavourites = async () => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const listId = await response.json();
-    console.log('Favourites Movies IDs:', listId);
     listId.forEach((movieId : number) => {
       if (movieId === movieInfos.id) {
         isFavourite.value = true
       }
     })
-    console.log(isFavourite.value)
     return null;
   } catch (error) {
     console.error('Error inserting new comment:', error);
@@ -250,22 +276,14 @@ const isInFavourites = async () => {
 }
 
 onMounted(async () => {
-  console.log('Fetching movie infos...');
   movieInfos = await fetchMovieInfos();
   useHead({titleTemplate: (movieInfos.title)});
-  console.log(movieInfos);
 
-  console.log('Fetching comments...');
   comments.value = await fetchComments();
-  console.log(comments.value);
 
-  console.log("Checking release date...")
-  releaseDatePast.value = hasBeenPublished(movieInfos.release_date)
-  console.log(releaseDatePast.value)
+  releaseDatePast.value = hasBeenPublished(movieInfos.release_date);
 
-  console.log("Checking favourite list...")
-  isInFavourites()
-  console.log(isFavourite.value)
+  isInFavourites();
 
   isLoading.value = false;
 

@@ -1,5 +1,9 @@
+<!-- 
+    Page de connexion de l'utilisateur
+-->
+
 <script setup lang="ts">
-const { loggedIn, user, fetch: refreshSession , clear: clearSession, session } = useUserSession()
+const { loggedIn, user, fetch: refreshSession, session } = useUserSession()
 const router = useRouter()
 
 useHead({titleTemplate: "Connexion"});
@@ -8,6 +12,9 @@ const username = ref("");
 const password = ref("");
 const passwordError = ref('');
 
+/**
+ * Connecte l'utilisateur
+ */
 async function login() {
   $fetch('/api/luka', {
     method: 'POST',
@@ -19,9 +26,6 @@ async function login() {
   .then(async () => {
     await refreshSession()
     if (loggedIn.value) {
-      console.log('User session set', user.value);
-      console.log('User session set', loggedIn.value);
-      console.log('User session set', session.value.user);
       await router.push('/browse')
     }
   })

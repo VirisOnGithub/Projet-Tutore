@@ -7,7 +7,6 @@ export default defineEventHandler(async (event) => {
 
     const secretsPath = "secrets.txt";
     const secrets = await fs.readFile(secretsPath, "utf-8");
-    // console.log(`Secrets content: ${secrets}`);
     try {
         const url =
             "https://api.themoviedb.org/3/trending/movie/day?language=fr&page=" + page;
@@ -19,7 +18,6 @@ export default defineEventHandler(async (event) => {
                     "Bearer " + secrets,
             },
         };
-        // console.log(`Fetching data from URL: ${url}`);
 
         const response = await fetch(url, options);
 
@@ -28,7 +26,6 @@ export default defineEventHandler(async (event) => {
         }
 
         const data = await response.json();
-        // console.log(`Data fetched: ${JSON.stringify(data)}`);
         return data;
     } catch (error) {
         console.error("Error in poster handler:", error);

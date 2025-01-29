@@ -1,7 +1,9 @@
+<!-- 
+    Bouton pour supprimer un film de la liste des films en favoris
+-->
 <script setup lang="ts">
 const { session } = useUserSession();
 const idUser = session.value.user?.id;
-const router = useRouter();
 const props = defineProps(
     {
       id: {
@@ -10,9 +12,14 @@ const props = defineProps(
       }
     }
 );
-const emit = defineEmits(['removeFromWatchLater']);
+const emit = defineEmits(['removeFromFavourites']);
 
-const deleteMovieFromWatchLater = async (event : Event) => {
+/**
+ * Supprime un film de la liste des films en favoris.
+ *
+ * @param {Event} event - L'événement de clic.
+ */
+const deleteMovieFromFavourites = async (event : Event) => {
   event.stopPropagation();
   try {
     const response = await fetch('/api/deleteFavourite', {
@@ -25,25 +32,18 @@ const deleteMovieFromWatchLater = async (event : Event) => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    console.log('Movie added to favourite list');
-    // router.go(0);
-    emit('removeFromWatchLater', props.id);
+    emit('removeFromFavourites', props.id);
     return null;
   } catch (error) {
-    console.error('Error removing movie from watchlater list:', error);
+    console.error('Error removing movie from favourites list:', error);
     return null;
   }
 };
-
-onMounted(async () => {
-  console.log('id', idUser);
-  console.log('route.params.id', props.id);
-});
 </script>
 
 <template>
   <button
-      @click="deleteMovieFromWatchLater"
+      @click="deleteMovieFromFavourites"
       class="rounded-xl ml-2 relative h-6 cursor-pointer flex items-center border border-black-500 bg-black-500 group hover:bg-black-600 active:bg-black-700 text-gray-100 hover:text-[#202020] hover:bg-gray-100"
   >
     <span

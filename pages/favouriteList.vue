@@ -1,3 +1,7 @@
+<!-- 
+    Liste de favoris
+-->
+
 <template>
   <div class="p-5 overflow-auto h-screen">
     <div class="flex">
@@ -11,7 +15,7 @@
     </div>
     <div v-else class="grid grid-cols-1 xl:grid-cols-2">
       <div v-if="movieInfosWatchLater.length !== 0" v-for="movie in movieInfosWatchLater" class="flex justify-center">
-        <FavouriteCard :key="movie.id" :movie="movie" @remove-from-watch-later="(id) => filterWatchList(id)"/>
+        <FavouriteCard :key="movie.id" :movie="movie" @remove-from-favourites="(id) => filterFavourites(id)"/>
       </div>
       <div v-else class="text-center text-2xl font-bold">Aucun film à regarder plus tard</div>
       <div class="h-8"></div>
@@ -43,6 +47,9 @@
   const movieInfosWatchLater = ref<Movie[]>([]);
   const { user } = useUserSession();
   
+  /**
+   * Récupère les films à regarder plus tard
+   */
   const fetchWatchLaterMovies = async () => {
     try {
       const response = await fetch('/api/getFavoritesMovies', {
@@ -62,6 +69,10 @@
     }
   };
   
+
+    /**
+     * Récupère les informations du film
+     */
   const fetchMovieInfos = async (id_film: number) => {
     try {
       const response = await fetch('/api/getMovieInfos', {
@@ -81,8 +92,11 @@
     }
   };
   
-  const filterWatchList = (id: number) => {
-    console.log('oui');
+    /**
+     * Filtre les films à regarder plus tard
+     * @param {number} id - L'identifiant du film à retirer
+     */
+  const filterFavourites = (id: number) => {
     movieInfosWatchLater.value = movieInfosWatchLater.value.filter((movie) => movie.id !== id);
   };
   

@@ -9,7 +9,6 @@ async function deleteComment(id: number): Promise<void> {
                     reject(error);
                     return;
                 }
-                console.log('Comment deleted');
                 resolve(results);
             });
         });
@@ -72,12 +71,10 @@ async function deleteUser(id: number): Promise<void> {
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const id = body.userId;
-    console.log('id', id);
 
     await deleteComment(id);
     await deleteFavoutite(id);
     await deleteWatchLater(id);
     await deleteUser(id);
-    console.log('User deleted');
 
 });

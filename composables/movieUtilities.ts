@@ -1,15 +1,26 @@
+/**
+ * 
+ * @param duration durée du film en minutes
+ * @returns durée du film en heures et minutes
+ */
 const castDuration = (duration: number): string => {
     const hours = Math.floor(duration / 60);
     const minutes = duration % 60;
     return `${hours}h${minutes}m`;
 }
 
+/**
+ * Vérifie si un film est déjà sorti
+ * @param release_date date de sortie du film
+ * @returns true si le film est déjà sorti, false sinon
+ */
 const hasBeenPublished = (release_date : string) => {
     const currDate = new Date();
     const release_dateFilm = new Date(release_date)
     return release_dateFilm <= currDate;
 }
 
+// Genres des films (source : https://developers.themoviedb.org/3/genres/get-movie-list)
 const movieGenres = [
     {
         "id": 28,

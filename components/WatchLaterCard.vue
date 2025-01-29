@@ -1,3 +1,7 @@
+<!-- 
+    Composant d'affichage des films dans la liste des films à voir plus tard
+-->
+
 <template>
   <div @click="goToMoviePage" class="bg-[#202020] border border-white p-5 rounded-lg cursor-pointer transition-transform transform hover:scale-105 h-44 my-16" style="width: 600px">
     <div class="flex items-start">
@@ -27,9 +31,6 @@
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import StarBadge from '~/components/StarBadge.vue';
-import FavouriteButton from '~/components/FavouriteButton.vue';
-import DeleteButton from '~/components/DeleteButtonWL.vue';
 import { castDuration, hasBeenPublished } from '~/composables/movieUtilities';
 
 interface Genres {
@@ -52,10 +53,18 @@ const props = defineProps<{
 const router = useRouter();
 let releaseDatePast: Ref<boolean | null> = ref(null);
 
+/**
+ * Redirige l'utilisateur vers la page du film
+ */
 const goToMoviePage = () => {
   router.push(`/movie/${props.movie.id}`);
 };
 
+/**
+ * Tronque le titre du film si celui-ci est trop long
+ * @param title Titre du film
+ * @returns Titre tronqué
+ */
 const truncateTitle = (title: string): string => {
   return title.length > 20 ? title.substring(0, 20) + '...' : title;
 };
