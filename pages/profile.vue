@@ -13,7 +13,7 @@
           <NuxtLink to="/favouriteList" :class="buttonStyle"><p>Favoris</p></NuxtLink>
         </div>
         <div class="flex items-center">
-          <NuxtLink to="/" :class="buttonStyle"><p>Commentaires</p></NuxtLink>
+          <NuxtLink to="/" :class="buttonStyle" @click="logOut"><p>Déconnexion</p></NuxtLink>
         </div>
         <div class="flex items-center">
           <NuxtLink to="/login" :class="buttonStyle" @click="deleteAccount"><p>Supprimer le compte</p></NuxtLink>
@@ -106,6 +106,12 @@ const fetchRecentWatchLater = async () => {
     return [];
   }
 };
+
+const logOut = async () => {
+  console.log('logging out');
+  await clearSession();
+  router.push('/');
+}
 
 const fetchRecentFavorites = async () => {
   try {
