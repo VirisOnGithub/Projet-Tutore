@@ -58,8 +58,8 @@
           </div>
         </div>
         <div class="flex flex-col items-center">
-          <h3 class="text-2xl font-bold">Laisser un avis</h3>
           <div v-if="loggedIn" class="flex flex-col items-center justify-center mt-10">
+            <h3 class="text-2xl font-bold">Laisser un avis</h3>
             <nuxt-rating
                 :rating-step="0.5"
                 :read-only="false"
@@ -70,6 +70,9 @@
             <!--          <RatingSlider :rating="newRating" @update:rating="updateRating"/>-->
             <button @click="addComment" class="bg-transparent border-2 border-green-500 font-semibold hover:bg-green-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-green-700 rounded m-1 transition-all">Ajouter un commentaire</button>
           </div>
+          <div v-else class="flex flex-col items-center justify-center mt-10">
+            <h3 class="text-2xl font-bold"><NuxtLink to="/login">Connectez-vous</NuxtLink> pour laisser un avis</h3>
+          </div>
         </div>
       </div>
     </div>
@@ -77,7 +80,6 @@
 </template>
 
 <script lang="ts" setup>
-import {forEach} from "superjson/dist/util";
 
 definePageMeta({
   layout: 'default',
@@ -200,6 +202,7 @@ const addComment = async () => {
     console.log('Comment inserted:', comment);
     comments.value = await fetchComments();
     console.log(comments.value)
+    commentaire.value = "";
     return null;
   } catch (error) {
     console.error('Error inserting new comment:', error);
@@ -233,7 +236,7 @@ const isInFavourites = async () => {
     }
     const listId = await response.json();
     console.log('Favourites Movies IDs:', listId);
-    listId.forEach((movieId) => {
+    listId.forEach((movieId : number) => {
       if (movieId === movieInfos.id) {
         isFavourite.value = true
       }

@@ -2,7 +2,7 @@
   <div v-if="isLoading" class="flex justify-center items-center h-72 text-2xl">Loading...</div>
   <UCarousel v-else :items="paths" :config="carouselConfig" arrows>
     <template #default="{ item }">
-      <div class="carousel__item">
+      <div class="carousel__item hover:scale-105 transform transition-transform">
         <NuxtLink :to="'/movie/' + item.id">
           <img :src="'https://image.tmdb.org/t/p/w500' + item.path" :alt="item.id" class="w-1/2">
         </NuxtLink>
