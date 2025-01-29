@@ -6,6 +6,7 @@ useHead({titleTemplate: "Connexion"});
 
 const username = ref("");
 const password = ref("");
+const passwordError = ref('');
 
 async function login() {
   $fetch('/api/luka', {
@@ -25,7 +26,7 @@ async function login() {
     }
   })
   .catch((e: Error) => {
-    console.error(e.message);
+    passwordError.value = 'Nom d\'utilisateur ou mot de passe incorrect';
   })
 }
 
@@ -43,6 +44,7 @@ async function login() {
           <label class="text-s font-bold after:content-['*'] after:text-red-400" for="password">Mot de passe</label>
           <input v-model="password" class="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-violet-500" type="password"
                  required placeholder="********" id="password">
+                 <p v-if="passwordError" class="text-red-500 text-xs mt-1">{{ passwordError }}</p>
           <div class="flex justify-between mb-4">
             <a href="#" class="text-xs text-indigo-500">Mot de passe oublié ?</a>
             <a href="/createAccount" class="text-xs text-indigo-500">Créer un compte</a>

@@ -18,7 +18,7 @@
         </div>
         <div id="actions" class="flex mt-3">
           <FavouriteButton :id="movie.id" @remove-from-watch-later="args => $emit('remove-from-watch-later', args)"/>
-          <DeleteButton :id="movie.id" @remove-from-watch-later="args => $emit('remove-from-watch-later', args)"/>
+          <DeleteButtonWL :id="movie.id" @remove-from-watch-later="args => $emit('remove-from-watch-later', args)"/>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
 import { useRouter } from 'vue-router';
 import StarBadge from '~/components/StarBadge.vue';
 import FavouriteButton from '~/components/FavouriteButton.vue';
-import DeleteButton from '~/components/DeleteButton.vue';
+import DeleteButton from '~/components/DeleteButtonWL.vue';
 import { castDuration, hasBeenPublished } from '~/composables/movieUtilities';
 
 interface Genres {

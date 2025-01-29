@@ -72,8 +72,9 @@ watch(() => router.currentRoute.value, async () => {
 });
 
 const logOut = async () => {
+  console.log('logging out');
   await clearSession();
-  await router.push('/');
+  router.push('/');
 }
 
 const capitalize = <T extends string>(str: T) => {

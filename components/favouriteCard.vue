@@ -18,7 +18,7 @@
             <Badge>{{ movie.genres.map((genre: Genres) => genre.name).slice(0,2).join(", ") }}</Badge>
           </div>
           <div id="actions" class="flex mt-3">
-            <DeleteButton :id="movie.id" @remove-from-watch-later="args => $emit('remove-from-watch-later', args)"/>
+            <DeleteButtonFavourite :id="movie.id" @remove-from-watch-later="args => $emit('remove-from-watch-later', args)"/>
           </div>
         </div>
       </div>

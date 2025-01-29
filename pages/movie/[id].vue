@@ -29,7 +29,7 @@
               <span v-else-if="releaseDatePast" class="text-lg">No rating</span>
               <p v-else><i>Ce film sortira prochainement</i></p>
             </Badge>
-            <WatchLaterButton />
+            <WatchLaterButton v-if="loggedIn" />
           </div>
           <div id="badges" class="mb-3 flex flex-wrap gap-2 z-[2]">
             <Badge v-for="country in movieInfos.production_countries" :key="country.iso_3166_1">
