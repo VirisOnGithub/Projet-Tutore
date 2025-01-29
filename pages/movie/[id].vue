@@ -29,7 +29,7 @@
               <span v-else-if="releaseDatePast" class="text-lg">No rating</span>
               <p v-else><i>Ce film sortira prochainement</i></p>
             </Badge>
-            <WatchLaterButton v-if="loggedIn" />
+            <WatchLaterButton v-if="loggedIn && !isFavourite" />
           </div>
           <div id="badges" class="mb-3 flex flex-wrap gap-2 z-[2]">
             <Badge v-for="country in movieInfos.production_countries" :key="country.iso_3166_1">
@@ -77,6 +77,8 @@
 </template>
 
 <script lang="ts" setup>
+import {forEach} from "superjson/dist/util";
+
 definePageMeta({
   layout: 'default',
 });
@@ -90,6 +92,7 @@ const newRating = ref(0);
 const { loggedIn, session } = useUserSession();
 const id = session.value.user?.id;
 let releaseDatePast: Ref<boolean | null> = ref(null);
+const isFavourite = ref(false)
 
 interface Genres {
   id: number;
@@ -170,27 +173,6 @@ const fetchComments = async () => {
     return null;
   }
 };
-
-const addToWatchLater = async () => {
-  try {
-    const response = await fetch('/api/addToWatchLater', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ movieId: route.params.id, userId: id })
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    console.log('Movie added to watchlater list');
-    return null;
-  } catch (error) {
-    console.error('Error adding movie to watchlater list:', error);
-    return null;
-  }
-};
-
 const castDuration = (duration: number): string => {
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
@@ -235,6 +217,35 @@ const hasBeenPublished = (release_date : string) => {
   return release_dateFilm <= currDate;
 }
 
+const isInFavourites = async () => {
+  try {
+    const response = await fetch('/api/getFavoritesMovies', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId: id
+      })
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const listId = await response.json();
+    console.log('Favourites Movies IDs:', listId);
+    listId.forEach((movieId) => {
+      if (movieId === movieInfos.id) {
+        isFavourite.value = true
+      }
+    })
+    console.log(isFavourite.value)
+    return null;
+  } catch (error) {
+    console.error('Error inserting new comment:', error);
+    return null;
+  }
+}
+
 onMounted(async () => {
   console.log('Fetching movie infos...');
   movieInfos = await fetchMovieInfos();
@@ -248,6 +259,10 @@ onMounted(async () => {
   console.log("Checking release date...")
   releaseDatePast.value = hasBeenPublished(movieInfos.release_date)
   console.log(releaseDatePast.value)
+
+  console.log("Checking favourite list...")
+  isInFavourites()
+  console.log(isFavourite.value)
 
   isLoading.value = false;
 
