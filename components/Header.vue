@@ -6,27 +6,29 @@
         <h1 class="inline-block text-white ml-2 font-bold text-4xl">MovieFinder</h1>
       </NuxtLink>
       <ul class="flex">
-<!--        <li v-if="loggedIn">-->
-<!--          <NuxtLink to="/profile" :class="buttonStyle">Profil</NuxtLink>-->
-<!--        </li>-->
+        <!--        <li v-if="loggedIn">-->
+        <!--          <NuxtLink to="/profile" :class="buttonStyle">Profil</NuxtLink>-->
+        <!--        </li>-->
         <li v-if="!loggedIn">
           <NuxtLink to="/login" :class="buttonStyle">Connexion</NuxtLink>
         </li>
-<!--        <li v-if="loggedIn">-->
-<!--          <NuxtLink to="/watchLater" :class="buttonStyle">À regarder plus tard</NuxtLink>-->
-<!--        </li>-->
-<!--        <li v-if="loggedIn">-->
-<!--          <NuxtLink to="/favouriteList" :class="buttonStyle">Favoris</NuxtLink>-->
-<!--        </li>-->
-<!--        <li v-if="loggedIn">-->
-<!--          <NuxtLink to="/draganddrop" :class="buttonStyle">Choisir ses films</NuxtLink>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <NuxtLink to="/about" :class="buttonStyle">Plus</NuxtLink>-->
-<!--        </li>-->
+        <!--        <li v-if="loggedIn">-->
+        <!--          <NuxtLink to="/watchLater" :class="buttonStyle">À regarder plus tard</NuxtLink>-->
+        <!--        </li>-->
+        <!--        <li v-if="loggedIn">-->
+        <!--          <NuxtLink to="/favouriteList" :class="buttonStyle">Favoris</NuxtLink>-->
+        <!--        </li>-->
+        <!--        <li v-if="loggedIn">-->
+        <!--          <NuxtLink to="/draganddrop" :class="buttonStyle">Choisir ses films</NuxtLink>-->
+        <!--        </li>-->
+        <!--        <li>-->
+        <!--          <NuxtLink to="/about" :class="buttonStyle">Plus</NuxtLink>-->
+        <!--        </li>-->
         <li v-if="loggedIn">
           <UDropdown class="cursor-pointer" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }">
-            <UAvatar :src="'https://ui-avatars.com/api//?name=' + username + '&background=C4B5FD&color=1D1D1D&&rounded=true&size=64'" size="xl" />
+            <UAvatar
+              :src="'https://ui-avatars.com/api//?name=' + username + '&background=C4B5FD&color=1D1D1D&&rounded=true&size=64'"
+              size="xl" />
 
             <template #logout="{ item }">
               <NuxtLink>
@@ -41,14 +43,14 @@
                 <span class="truncate">{{ item.label }}</span>
               </NuxtLink>
 
-<!--              <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />-->
+              <!--              <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />-->
             </template>
 
           </UDropdown>
         </li>
-<!--        <li v-if="loggedIn">-->
-<!--          <NuxtLink @click="logOut" :class="buttonStyle" class="cursor-pointer">Déconnexion</NuxtLink>-->
-<!--        </li>-->
+        <!--        <li v-if="loggedIn">-->
+        <!--          <NuxtLink @click="logOut" :class="buttonStyle" class="cursor-pointer">Déconnexion</NuxtLink>-->
+        <!--        </li>-->
       </ul>
     </nav>
   </header>
@@ -56,7 +58,7 @@
 
 <script lang="ts" setup>
 
-const buttonStyle : string = "bg-transparent font-semibold hover:bg-violet-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-violet-700 rounded m-1 transition-all";
+const buttonStyle: string = "bg-transparent font-semibold hover:bg-violet-500  hover:text-white py-2 px-4 hover:border-transparent active:bg-violet-700 rounded m-1 transition-all";
 const { loggedIn, clear: clearSession, session, fetch, user } = useUserSession();
 const router = useRouter();
 const username = ref(user.value?.username);
@@ -74,7 +76,7 @@ watch(() => router.currentRoute.value, async () => {
 const logOut = async () => {
   console.log('logging out');
   await clearSession();
-  router.push('/');
+  await router.push('/');
 }
 
 const capitalize = <T extends string>(str: T) => {
